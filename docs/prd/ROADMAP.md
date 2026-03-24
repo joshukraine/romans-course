@@ -22,7 +22,7 @@ Establish the repository, hosting configuration, and file structure.
 - [x] Set up directory structure: `data/`, `handouts/`, `assets/img/`, `assets/css/`, `snippets/`
 - [x] Create `.gitignore` (exclude `snippets/`, `.DS_Store`, OS files)
 - [x] Create `CLAUDE.md` with project-level guidance for Claude Code
-- [ ] Create `README.md` with project description and content update instructions
+- [x] Create `README.md` with project description and content update instructions
 - [ ] Enable GitHub Pages on the `main` branch
 - [ ] Create skeleton `index.html` with Tailwind CDN, Alpine.js CDN, and Umami tracking script tags, confirming all load correctly
 - [ ] Verify the site is accessible at `joshukraine.github.io/romans-course/`
