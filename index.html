@@ -324,7 +324,7 @@
                             </template>
                           </div>
                           <template
-                            x-if="lecture.status === 'upcoming' || (!lecture.status && false)"
+                            x-if="lecture.status === 'upcoming'"
                           >
                             <span
                               class="mt-2 inline-block rounded-md bg-sand-100 px-2 py-0.5 text-xs font-medium text-sand-600"
@@ -334,6 +334,101 @@
                           </template>
                         </div>
                       </div>
+
+                      <!-- Video, handouts, quiz — only for published lectures -->
+                      <template
+                        x-if="lecture.status !== 'upcoming'"
+                      >
+                        <div class="mt-4 space-y-3">
+                          <!-- Video thumbnail -->
+                          <template x-if="lecture.videoUrl">
+                            <a
+                              :href="lecture.videoUrl"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="group relative block overflow-hidden rounded-md"
+                            >
+                              <img
+                                :src="'https://img.youtube.com/vi/' + (lecture.videoUrl.match(/[?&]v=([^&]+)/) || lecture.videoUrl.match(/youtu\.be\/([^?]+)/) || [,''])[1] + '/mqdefault.jpg'"
+                                :alt="'Відео: ' + lecture.title"
+                                class="w-full object-cover"
+                                loading="lazy"
+                              />
+                              <div
+                                class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors"
+                              >
+                                <svg
+                                  viewBox="0 0 24 24"
+                                  fill="currentColor"
+                                  aria-hidden="true"
+                                  class="size-12 text-white/90 drop-shadow-lg"
+                                >
+                                  <path
+                                    fill-rule="evenodd"
+                                    d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z"
+                                    clip-rule="evenodd"
+                                  />
+                                </svg>
+                              </div>
+                            </a>
+                          </template>
+
+                          <!-- Handouts -->
+                          <template x-if="lecture.handouts.length > 0">
+                            <div class="space-y-1">
+                              <template
+                                x-for="handout in lecture.handouts"
+                                :key="handout.file"
+                              >
+                                <a
+                                  :href="handout.file"
+                                  download
+                                  class="flex items-center gap-x-2 rounded-md px-2 py-1.5 text-sm text-sky-blue-600 hover:bg-sand-100 hover:text-sky-blue-500"
+                                >
+                                  <svg
+                                    viewBox="0 0 20 20"
+                                    fill="currentColor"
+                                    aria-hidden="true"
+                                    class="size-4 shrink-0"
+                                  >
+                                    <path
+                                      d="M10.75 2.75a.75.75 0 0 0-1.5 0v8.614L6.295 8.235a.75.75 0 1 0-1.09 1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 0 0 0-1.09-1.03l-2.955 3.129V2.75Z"
+                                    />
+                                    <path
+                                      d="M3.5 12.75a.75.75 0 0 0-1.5 0v2.5A2.75 2.75 0 0 0 4.75 18h10.5A2.75 2.75 0 0 0 18 15.25v-2.5a.75.75 0 0 0-1.5 0v2.5c0 .69-.56 1.25-1.25 1.25H4.75c-.69 0-1.25-.56-1.25-1.25v-2.5Z"
+                                    />
+                                  </svg>
+                                  <span x-text="handout.title"></span>
+                                </a>
+                              </template>
+                            </div>
+                          </template>
+
+                          <!-- Quiz -->
+                          <template x-if="lecture.quizUrl">
+                            <a
+                              :href="lecture.quizUrl"
+                              target="_blank"
+                              rel="noopener noreferrer"
+                              class="inline-flex items-center gap-x-2 rounded-md bg-sky-blue-50 px-3 py-1.5 text-sm font-medium text-sky-blue-700 hover:bg-sky-blue-100"
+                            >
+                              <svg
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                class="size-4 shrink-0"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              Пройти тест
+                            </a>
+                          </template>
+                        </div>
+                      </template>
                     </article>
                   </template>
                 </dd>
