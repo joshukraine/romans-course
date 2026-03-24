@@ -27,12 +27,19 @@ See `docs/prd/02-page-layout-and-content.md` §5 for the full content update wor
 
 ## Local Development
 
+Requires [Node.js](https://nodejs.org/) and `live-server` installed globally:
+
 ```bash
-python3 -m http.server 8000
-# Visit http://localhost:8000
+npm install -g live-server
 ```
 
-No dependencies to install. The site uses CDN-loaded scripts only.
+Then from the project root:
+
+```bash
+live-server --port=8000
+```
+
+This opens the site in your default browser and automatically reloads when files change. No project-level dependencies to install — the site uses CDN-loaded scripts only.
 
 ## Documentation
 
