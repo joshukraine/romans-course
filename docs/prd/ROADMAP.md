@@ -23,9 +23,9 @@ Establish the repository, hosting configuration, and file structure.
 - [x] Create `.gitignore` (exclude `snippets/`, `.DS_Store`, OS files)
 - [x] Create `CLAUDE.md` with project-level guidance for Claude Code
 - [x] Create `README.md` with project description and content update instructions
-- [ ] Enable GitHub Pages on the `main` branch
+- [x] Enable GitHub Pages on the `main` branch
 - [x] Create skeleton `index.html` with Tailwind CDN, Alpine.js CDN, and Umami tracking script tags, confirming all load correctly
-- [ ] Verify the site is accessible at `joshukraine.github.io/romans-course/`
+- [x] Verify the site is accessible at `joshukraine.github.io/romans-course/`
 - [ ] Configure custom domain: update Namecheap DNS (A records + CNAME), add `CNAME` file to repo, enable HTTPS in GitHub Pages settings
 - [ ] Verify `joshukraine.com/romans-course/` loads correctly with HTTPS
 
