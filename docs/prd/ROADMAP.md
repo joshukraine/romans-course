@@ -6,11 +6,11 @@ This document tracks implementation progress through phased delivery. Phases are
 
 ## Phase Overview
 
-| Phase | Name | Dependencies | Status |
-| --- | --- | --- | --- |
-| 0 | Project Foundation | — | Complete |
-| 1 | Core Page Structure | Phase 0 | Not started |
-| 2 | Content Population and Launch | Phase 1 | Not started |
+| Phase | Name                          | Dependencies | Status      |
+| ----- | ----------------------------- | ------------ | ----------- |
+| 0     | Project Foundation            | —            | Complete    |
+| 1     | Core Page Structure           | Phase 0      | Not started |
+| 2     | Content Population and Launch | Phase 1      | Not started |
 
 ---
 
@@ -38,7 +38,7 @@ Establish the repository, hosting configuration, and file structure.
 Build the functional page: data-driven rendering, navigation, responsive layout, and all interactive behavior.
 
 - [x] Optimize hero image: compress Parthenon source image for web (target < 200 KB), create responsive variants if needed, place in `assets/img/`
-- [ ] Create Open Graph preview image (`assets/img/og-image.jpg`): 1200×630px, derived from Parthenon hero image with course title overlay
+- [x] Create Open Graph preview image (`assets/img/og-image.jpg`): 1200×630px, derived from Parthenon hero image with course title overlay
 - [x] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
 - [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
 - [x] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
@@ -56,9 +56,9 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 - [x] Implement mobile navigation: hamburger toggle with dropdown unit links (Alpine.js)
 - [x] Implement smooth scroll for unit anchor links, accounting for sticky header offset
 - [ ] Implement responsive layout: mobile-first, max-width content area on desktop, readable spacing
-- [ ] Implement footer: teacher name, organization link, copyright, Unsplash photo attribution
-- [ ] Add Open Graph and Twitter Card meta tags in `<head>`
-- [ ] Add Umami analytics tracking script in `<head>`
+- [x] Implement footer: teacher name, organization link, copyright, Unsplash photo attribution
+- [x] Add Open Graph and Twitter Card meta tags in `<head>`
+- [x] Add Umami analytics tracking script in `<head>`
 - [ ] Style the page: beige/blue color palette, typography, card styling, whitespace, icons (per §7 design direction)
 
 **PRD references:** `02-page-layout-and-content.md` §2–§9

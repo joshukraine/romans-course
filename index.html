@@ -4,6 +4,39 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Послання до Римлян — Експозиційний курс</title>
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Послання до Римлян — Експозиційний курс" />
+    <meta
+      property="og:description"
+      content="Експозиційний курс з вивчення Послання до Римлян. Лекції, конспекти та тести."
+    />
+    <meta
+      property="og:image"
+      content="https://joshukraine.com/romans-course/assets/img/og-image.jpg"
+    />
+    <meta
+      property="og:url"
+      content="https://joshukraine.com/romans-course/"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="uk_UA" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Послання до Римлян — Експозиційний курс"
+    />
+    <meta
+      name="twitter:description"
+      content="Експозиційний курс з вивчення Послання до Римлян. Лекції, конспекти та тести."
+    />
+    <meta
+      name="twitter:image"
+      content="https://joshukraine.com/romans-course/assets/img/og-image.jpg"
+    />
+
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
     <style type="text/tailwindcss">
       @theme {
@@ -445,5 +478,51 @@
         </div>
       </template>
     </main>
+
+    <!-- Footer -->
+    <footer class="bg-sand-100">
+      <div
+        class="mx-auto max-w-4xl px-6 py-8 text-center text-sm text-sand-500"
+      >
+        <p>
+          <span x-text="course.teacher?.name"></span> ·
+          <a
+            :href="course.teacher?.organizationUrl"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sky-blue-600 hover:text-sky-blue-500"
+            x-text="course.teacher?.organization"
+          ></a>
+        </p>
+        <p class="mt-2">
+          Фото:
+          <a
+            href="https://unsplash.com/photos/ilQmlVIMN4c"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sky-blue-600 hover:text-sky-blue-500"
+            >Spencer Davis</a
+          >
+          /
+          <a
+            href="https://unsplash.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sky-blue-600 hover:text-sky-blue-500"
+            >Unsplash</a
+          >
+        </p>
+        <p class="mt-2">
+          &copy; 2025 Joshua Steele. Всі права захищені. ·
+          <a
+            href="https://github.com/joshukraine/romans-course"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="text-sky-blue-600 hover:text-sky-blue-500"
+            >GitHub</a
+          >
+        </p>
+      </div>
+    </footer>
   </body>
 </html>
