@@ -36,7 +36,7 @@ npm install -g live-server
 Then from the project root:
 
 ```bash
-live-server --port=8000
+bin/dev
 ```
 
 This opens the site in your default browser and automatically reloads when files change. No project-level dependencies to install — the site uses CDN-loaded scripts only.
