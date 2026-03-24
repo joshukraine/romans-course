@@ -5,8 +5,7 @@ A static, mobile-friendly website that serves as the central hub for all materia
 ## Quick-Start Commands
 
 ```bash
-# No build step. Start a local server with live reload:
-live-server --port=8000       # Opens browser, reloads on file changes
+bin/dev                       # Start local server with live reload
 ```
 
 There is no test framework or linter for this project. Validation is manual: check links, test on mobile, verify PDF downloads.
