@@ -188,21 +188,45 @@
       </div>
     </section>
 
+    <!-- Course introduction -->
+    <section class="bg-sand-50">
+      <div class="px-6 py-16 sm:py-24 lg:px-8">
+        <div class="mx-auto max-w-2xl text-center">
+          <p
+            class="text-lg/8 text-pretty text-sand-700"
+            x-text="course.description"
+          ></p>
+          <div
+            class="mt-10 flex items-center justify-center gap-x-6"
+            x-show="course.registrationUrl || course.viberUrl"
+          >
+            <a
+              x-show="course.registrationUrl"
+              :href="course.registrationUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="rounded-md bg-sky-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-sky-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-blue-600"
+            >
+              Реєстрація
+            </a>
+            <a
+              x-show="course.viberUrl"
+              :href="course.viberUrl"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-sm/6 font-semibold text-sky-blue-600 hover:text-sky-blue-500"
+            >
+              Viber-спільнота <span aria-hidden="true">→</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <!-- Page content (placeholder — will be replaced by subsequent issues) -->
     <main class="max-w-4xl mx-auto px-4 py-16 text-center">
       <template x-if="loading">
         <p class="text-lg text-sand-500">Завантаження...</p>
-      </template>
-      <template x-if="!loading">
-        <div>
-          <p class="text-sm text-sand-500">
-            Розділів: <span x-text="units.length"></span> ·
-            Лекцій:
-            <span
-              x-text="units.reduce((sum, u) => sum + u.lectures.length, 0)"
-            ></span>
-          </p>
-        </div>
       </template>
     </main>
   </body>
