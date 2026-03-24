@@ -37,11 +37,11 @@ Establish the repository, hosting configuration, and file structure.
 
 Build the functional page: data-driven rendering, navigation, responsive layout, and all interactive behavior.
 
-- [ ] Optimize hero image: compress Parthenon source image for web (target < 200 KB), create responsive variants if needed, place in `assets/img/`
+- [x] Optimize hero image: compress Parthenon source image for web (target < 200 KB), create responsive variants if needed, place in `assets/img/`
 - [ ] Create Open Graph preview image (`assets/img/og-image.jpg`): 1200×630px, derived from Parthenon hero image with course title overlay
 - [x] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
 - [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
-- [ ] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
+- [x] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
 - [ ] Implement course introduction section (description, registration link, Viber link — read from JSON)
 - [ ] Implement unit rendering: loop over units, display unit headers with number, title, passage, and lecture count
 - [ ] Implement collapsible unit sections with Alpine.js (most recent unit expanded by default, others collapsed)
@@ -51,10 +51,10 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 - [ ] Implement quiz link display (shown only when `quizUrl` is present)
 - [ ] Implement `upcoming` lecture status (show title and date only, no video/handout/quiz links)
 - [ ] Implement anchor IDs for each lecture (`#lecture-{N}`) with hash-based scroll-on-load after Alpine renders
-- [ ] Implement sticky navigation bar with course title
-- [ ] Implement desktop navigation: horizontal unit anchor links in the navigation bar
-- [ ] Implement mobile navigation: hamburger toggle with dropdown unit links (Alpine.js)
-- [ ] Implement smooth scroll for unit anchor links, accounting for sticky header offset
+- [x] Implement sticky navigation bar with course title
+- [x] Implement desktop navigation: horizontal unit anchor links in the navigation bar
+- [x] Implement mobile navigation: hamburger toggle with dropdown unit links (Alpine.js)
+- [x] Implement smooth scroll for unit anchor links, accounting for sticky header offset
 - [ ] Implement responsive layout: mobile-first, max-width content area on desktop, readable spacing
 - [ ] Implement footer: teacher name, organization link, copyright, Unsplash photo attribution
 - [ ] Add Open Graph and Twitter Card meta tags in `<head>`
