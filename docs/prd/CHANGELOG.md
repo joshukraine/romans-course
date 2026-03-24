@@ -34,6 +34,14 @@ Each entry records one deviation or decision:
 
 ## Entries
 
+### 2026-03-24 — 02-page-layout-and-content.md §11 "Custom Domain Configuration"
+
+**What changed:** Custom domain (`joshukraine.com`) is configured on the `joshukraine.github.io` user site repo, not on the `romans-course` project repo. The `romans-course` repo has no CNAME file and no custom domain setting. The course page is served at `joshukraine.com/romans-course/` automatically as a GitHub Pages project page under the user site's domain.
+
+**Why:** Setting a custom domain on a project repo serves that repo's content at the domain root (`joshukraine.com/`), not at the expected path (`joshukraine.com/romans-course/`). GitHub Pages only supports the `/repo-name/` path structure when the custom domain is owned by the user site repo (`username.github.io`). The PRD expects the course page at `/romans-course/` with the root reserved for a future landing page.
+
+**Category:** Discovery
+
 ### 2026-03-24 — 01-overview.md §Tech Stack
 
 **What changed:** Added Tailwind Plus Elements (`@tailwindplus/elements@1`) as a CDN dependency for interactive UI component behavior (disclosures, dropdowns, dialogs).
