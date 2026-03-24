@@ -223,10 +223,87 @@
       </div>
     </section>
 
-    <!-- Page content (placeholder — will be replaced by subsequent issues) -->
-    <main class="max-w-4xl mx-auto px-4 py-16 text-center">
+    <!-- Course content -->
+    <main class="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <template x-if="loading">
-        <p class="text-lg text-sand-500">Завантаження...</p>
+        <p class="text-center text-lg text-sand-500">Завантаження...</p>
+      </template>
+      <template x-if="!loading">
+        <div class="divide-y divide-sand-200">
+          <template x-for="(unit, unitIndex) in units" :key="unit.number">
+            <div
+              :id="'unit-' + unit.number"
+              class="scroll-mt-16 py-8 first:pt-0 last:pb-0"
+            >
+              <dt>
+                <button
+                  type="button"
+                  command="--toggle"
+                  :commandfor="'unit-disclosure-' + unit.number"
+                  class="flex w-full items-start justify-between text-left text-sand-900"
+                >
+                  <div>
+                    <span
+                      class="text-xl font-semibold sm:text-2xl"
+                      x-text="'Розділ ' + unit.number + ': ' + unit.title"
+                    ></span>
+                    <div
+                      class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
+                    >
+                      <span x-text="unit.passage"></span>
+                      <span aria-hidden="true">·</span>
+                      <span
+                        x-text="unit.lectures.length + ' ' + (unit.lectures.length === 1 ? 'лекція' : unit.lectures.length < 5 ? 'лекції' : 'лекцій')"
+                      ></span>
+                    </div>
+                  </div>
+                  <span class="ml-6 flex h-7 items-center">
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                      class="size-6 text-sand-400 in-aria-expanded:hidden"
+                    >
+                      <path
+                        d="M12 6v12m6-6H6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                    <svg
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      aria-hidden="true"
+                      class="size-6 text-sand-400 not-in-aria-expanded:hidden"
+                    >
+                      <path
+                        d="M18 12H6"
+                        stroke-linecap="round"
+                        stroke-linejoin="round"
+                      />
+                    </svg>
+                  </span>
+                </button>
+              </dt>
+              <el-disclosure
+                :id="'unit-disclosure-' + unit.number"
+                :hidden="unitIndex !== units.length - 1 ? true : undefined"
+                class="contents"
+              >
+                <dd class="mt-6">
+                  <p
+                    class="text-center text-sm text-sand-400"
+                    x-text="'Лекції розділу ' + unit.number + ' з\\'являться тут'"
+                  ></p>
+                </dd>
+              </el-disclosure>
+            </div>
+          </template>
+        </div>
       </template>
     </main>
   </body>
