@@ -42,7 +42,7 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 - [x] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
 - [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
 - [x] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
-- [ ] Implement course introduction section (description, registration link, Viber link — read from JSON)
+- [x] Implement course introduction section (description, registration link, Viber link — read from JSON)
 - [ ] Implement unit rendering: loop over units, display unit headers with number, title, passage, and lecture count
 - [ ] Implement collapsible unit sections with Alpine.js (most recent unit expanded by default, others collapsed)
 - [ ] Implement lecture card rendering within units: number, title, date (formatted with `Intl.DateTimeFormat`), passage
