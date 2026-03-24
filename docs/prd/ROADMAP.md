@@ -26,7 +26,7 @@ Establish the repository, hosting configuration, and file structure.
 - [x] Enable GitHub Pages on the `main` branch
 - [x] Create skeleton `index.html` with Tailwind CDN, Alpine.js CDN, and Umami tracking script tags, confirming all load correctly
 - [x] Verify the site is accessible at `joshukraine.github.io/romans-course/`
-- [ ] Configure custom domain: update Namecheap DNS (A records + CNAME), add `CNAME` file to repo, enable HTTPS in GitHub Pages settings
+- [~] Configure custom domain: update Namecheap DNS (A records + CNAME), add `CNAME` file to repo, enable HTTPS in GitHub Pages settings
 - [ ] Verify `joshukraine.com/romans-course/` loads correctly with HTTPS
 
 **PRD references:** `01-overview.md` §Tech Stack; `02-page-layout-and-content.md` §1 "Site Structure", §11 "Custom Domain Configuration"
