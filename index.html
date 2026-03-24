@@ -5,6 +5,35 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Послання до Римлян — Експозиційний курс</title>
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <style type="text/tailwindcss">
+      @theme {
+        --color-sand-50: #faf8f5;
+        --color-sand-100: #f2ede6;
+        --color-sand-200: #e5ddd1;
+        --color-sand-300: #d4c8b5;
+        --color-sand-400: #bfad94;
+        --color-sand-500: #a99378;
+        --color-sand-600: #8a7460;
+        --color-sand-700: #6e5c4e;
+        --color-sand-800: #574a40;
+        --color-sand-900: #3e3530;
+
+        --color-sky-blue-50: #f0f5fa;
+        --color-sky-blue-100: #dce8f2;
+        --color-sky-blue-200: #b8d0e5;
+        --color-sky-blue-300: #8db3d4;
+        --color-sky-blue-400: #6896c0;
+        --color-sky-blue-500: #4a7aa8;
+        --color-sky-blue-600: #3b6189;
+        --color-sky-blue-700: #2f4e6e;
+        --color-sky-blue-800: #253d57;
+        --color-sky-blue-900: #1c2e42;
+      }
+
+      html {
+        scroll-behavior: smooth;
+      }
+    </style>
     <script
       src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
       type="module"
@@ -20,7 +49,7 @@
     ></script>
   </head>
   <body
-    class="bg-stone-50 text-stone-800"
+    class="bg-sand-50 text-sand-800"
     x-data="{
       course: {},
       units: [],
