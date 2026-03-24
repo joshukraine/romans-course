@@ -18,10 +18,10 @@ This document tracks implementation progress through phased delivery. Phases are
 
 Establish the repository, hosting configuration, and file structure.
 
-- [ ] Create `romans-course` repository on GitHub (public)
-- [ ] Set up directory structure: `data/`, `handouts/`, `assets/img/`, `assets/css/`, `snippets/`
-- [ ] Create `.gitignore` (exclude `snippets/`, `.DS_Store`, OS files)
-- [ ] Create `CLAUDE.md` with project-level guidance for Claude Code
+- [x] Create `romans-course` repository on GitHub (public)
+- [x] Set up directory structure: `data/`, `handouts/`, `assets/img/`, `assets/css/`, `snippets/`
+- [x] Create `.gitignore` (exclude `snippets/`, `.DS_Store`, OS files)
+- [x] Create `CLAUDE.md` with project-level guidance for Claude Code
 - [ ] Create `README.md` with project description and content update instructions
 - [ ] Enable GitHub Pages on the `main` branch
 - [ ] Create skeleton `index.html` with Tailwind CDN, Alpine.js CDN, and Umami tracking script tags, confirming all load correctly

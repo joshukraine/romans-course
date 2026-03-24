@@ -26,8 +26,6 @@ There is no test framework or linter for this project. Validation is manual: che
 
 ## Architectural Guardrails
 
-<!-- TODO: add project-specific guardrails — suggestions below -->
-
 1. **No build step** — everything runs from CDN scripts and static files. Do not introduce npm, bundlers, or SSGs.
 2. **JSON-driven content** — all course data lives in `course.json`. Do not hardcode lecture content in HTML.
 3. **No licensed snippets in version control** — Tailwind Plus snippets go in `snippets/` (gitignored) for local reference only.
