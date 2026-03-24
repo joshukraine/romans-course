@@ -1,6 +1,9 @@
 # Licensed Tailwind Plus reference snippets (local use only)
 snippets/
 
+# Claude Code local settings (user-specific, not shared)
+.claude/settings.local.json
+
 # OS files
 .DS_Store
 Thumbs.db
