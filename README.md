@@ -44,3 +44,12 @@ This opens the site in your default browser and automatically reloads when files
 ## Documentation
 
 Detailed product requirements and implementation roadmap live in `docs/prd/`. Start with [docs/prd/README.md](docs/prd/README.md) for the file index.
+
+## License
+
+This project uses a split license:
+
+- **Code** (HTML, CSS, JavaScript, configuration files): [MIT License](LICENSE)
+- **Course content** (PDF handouts, lecture descriptions, quiz content, course metadata in `course.json`): Copyright (c) 2025 Joshua Steele. All rights reserved.
+
+The hero image is by [Spencer Davis on Unsplash](https://unsplash.com/photos/ilQmlVIMN4c) and is used under the [Unsplash License](https://unsplash.com/license).
