@@ -39,8 +39,8 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 
 - [ ] Optimize hero image: compress Parthenon source image for web (target < 200 KB), create responsive variants if needed, place in `assets/img/`
 - [ ] Create Open Graph preview image (`assets/img/og-image.jpg`): 1200×630px, derived from Parthenon hero image with course title overlay
-- [ ] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
-- [ ] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
+- [x] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
+- [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
 - [ ] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
 - [ ] Implement course introduction section (description, registration link, Viber link — read from JSON)
 - [ ] Implement unit rendering: loop over units, display unit headers with number, title, passage, and lecture count

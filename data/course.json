@@ -1,0 +1,88 @@
+{
+  "course": {
+    "title": "Послання до Римлян",
+    "description": "Експозиційний курс з вивчення Послання до Римлян. Курс проводиться в євангельській церкві у Львові, Україна. Заняття відбуваються щомісяця — дві 45-хвилинні лекції за одну зустріч.",
+    "registrationUrl": "https://forms.google.com/placeholder",
+    "viberUrl": "https://invite.viber.com/placeholder",
+    "teacher": {
+      "name": "Джошуа Стіл",
+      "organization": "Euro Team Outreach",
+      "organizationUrl": "https://euroteamoutreach.org"
+    }
+  },
+  "units": [
+    {
+      "number": 1,
+      "title": "Вступ і основи",
+      "passage": "Римлян 1:1–17",
+      "lectures": [
+        {
+          "number": 1,
+          "title": "Огляд курсу та методологія вивчення Біблії",
+          "date": "2025-01-25",
+          "passage": "Римлян 1:1–7",
+          "status": "published",
+          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "handouts": [
+            {
+              "title": "Методологія вивчення Біблії (10 пунктів)",
+              "file": "handouts/lecture-01-bible-study-methodology.pdf"
+            }
+          ],
+          "quizUrl": "https://forms.google.com/placeholder-quiz-1"
+        },
+        {
+          "number": 2,
+          "title": "Привітання Павла та тема послання",
+          "date": "2025-01-25",
+          "passage": "Римлян 1:8–17",
+          "status": "published",
+          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "handouts": [
+            {
+              "title": "Структура Послання до Римлян",
+              "file": "handouts/lecture-02-romans-structure.pdf"
+            },
+            {
+              "title": "Тема послання — Римлян 1:16–17",
+              "file": "handouts/lecture-02-theme-verse.pdf"
+            }
+          ],
+          "quizUrl": null
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Гнів Божий об'явлений",
+      "passage": "Римлян 1:18–3:20",
+      "lectures": [
+        {
+          "number": 3,
+          "title": "Гнів Божий проти нечестивості",
+          "date": "2025-02-22",
+          "passage": "Римлян 1:18–32",
+          "status": "published",
+          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "handouts": [
+            {
+              "title": "Слово κατέχω — дослідження",
+              "file": "handouts/lecture-03-katecho-word-study.pdf"
+            }
+          ],
+          "quizUrl": null
+        },
+        {
+          "number": 4,
+          "title": "Суд Божий — Римлян 2:1–16",
+          "date": "2025-02-22",
+          "passage": "Римлян 2:1–16",
+          "status": "upcoming",
+          "videoUrl": null,
+          "handouts": [],
+          "quizUrl": null
+        }
+      ]
+    }
+  ]
+}
