@@ -43,14 +43,14 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 - [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
 - [x] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
 - [x] Implement course introduction section (description, registration link, Viber link — read from JSON)
-- [ ] Implement unit rendering: loop over units, display unit headers with number, title, passage, and lecture count
-- [ ] Implement collapsible unit sections with Alpine.js (most recent unit expanded by default, others collapsed)
-- [ ] Implement lecture card rendering within units: number, title, date (formatted with `Intl.DateTimeFormat`), passage
-- [ ] Implement video thumbnail display: YouTube thumbnail image linked to video URL, opens in new tab
-- [ ] Implement handout download links with download icons
-- [ ] Implement quiz link display (shown only when `quizUrl` is present)
-- [ ] Implement `upcoming` lecture status (show title and date only, no video/handout/quiz links)
-- [ ] Implement anchor IDs for each lecture (`#lecture-{N}`) with hash-based scroll-on-load after Alpine renders
+- [x] Implement unit rendering: loop over units, display unit headers with number, title, passage, and lecture count
+- [x] Implement collapsible unit sections with Alpine.js (most recent unit expanded by default, others collapsed)
+- [x] Implement lecture card rendering within units: number, title, date (formatted with `Intl.DateTimeFormat`), passage
+- [x] Implement video thumbnail display: YouTube thumbnail image linked to video URL, opens in new tab
+- [x] Implement handout download links with download icons
+- [x] Implement quiz link display (shown only when `quizUrl` is present)
+- [x] Implement `upcoming` lecture status (show title and date only, no video/handout/quiz links)
+- [x] Implement anchor IDs for each lecture (`#lecture-{N}`) with hash-based scroll-on-load after Alpine renders
 - [x] Implement sticky navigation bar with course title
 - [x] Implement desktop navigation: horizontal unit anchor links in the navigation bar
 - [x] Implement mobile navigation: hamburger toggle with dropdown unit links (Alpine.js)
