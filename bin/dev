@@ -1,4 +1,4 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-exec live-server --port=8000 --ignore='.git,snippets,docs'
+exec live-server --port=8000 --ignore='**/.git/**,**/snippets/**,**/docs/**'
