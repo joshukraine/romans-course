@@ -1,0 +1,6 @@
+# Licensed Tailwind Plus reference snippets (local use only)
+snippets/
+
+# OS files
+.DS_Store
+Thumbs.db
