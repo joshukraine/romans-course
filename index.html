@@ -508,9 +508,7 @@
                               :title="copiedLecture === lecture.number ? 'Скопійовано!' : 'Копіювати посилання'"
                             >
                               <span class="sr-only">Копіювати посилання</span>
-                              <template
-                                x-if="copiedLecture !== lecture.number"
-                              >
+                              <template x-if="copiedLecture !== lecture.number">
                                 <svg
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
@@ -525,9 +523,7 @@
                                   />
                                 </svg>
                               </template>
-                              <template
-                                x-if="copiedLecture === lecture.number"
-                              >
+                              <template x-if="copiedLecture === lecture.number">
                                 <span
                                   class="inline-flex items-center gap-x-1 text-sky-blue-600"
                                 >
