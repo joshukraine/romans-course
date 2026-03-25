@@ -188,7 +188,7 @@
                   <template x-for="unit in units" :key="unit.number">
                     <a
                       :href="'#unit-' + unit.number"
-                      class="-mx-3 block rounded-lg px-3 py-2 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
+                      class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
                       x-text="'Розділ ' + unit.number + ': ' + unit.title"
                       @click="document.getElementById('mobile-menu').close()"
                     ></a>
@@ -423,7 +423,7 @@
                                 <a
                                   :href="handout.file"
                                   download
-                                  class="flex items-center gap-x-2 rounded-md px-2 py-1.5 text-sm text-sky-blue-600 hover:bg-sand-100 hover:text-sky-blue-500"
+                                  class="flex items-center gap-x-2 rounded-md px-3 py-2.5 text-sm text-sky-blue-600 hover:bg-sand-100 hover:text-sky-blue-500"
                                 >
                                   <svg
                                     viewBox="0 0 20 20"
@@ -450,7 +450,7 @@
                               :href="lecture.quizUrl"
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="inline-flex items-center gap-x-2 rounded-md bg-sky-blue-50 px-3 py-1.5 text-sm font-medium text-sky-blue-700 hover:bg-sky-blue-100"
+                              class="inline-flex items-center gap-x-2 rounded-md bg-sky-blue-50 px-3 py-2.5 text-sm font-medium text-sky-blue-700 hover:bg-sky-blue-100"
                             >
                               <svg
                                 viewBox="0 0 20 20"
