@@ -68,6 +68,10 @@
       html {
         scroll-behavior: smooth;
       }
+
+      .link-inline {
+        @apply text-sky-blue-600 hover:text-sky-blue-500 hover:border-b hover:border-sky-blue-500;
+      }
     </style>
     <script
       src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
@@ -253,8 +257,9 @@
             >
               Експозиційний курс з вивчення Послання до Римлян
             </p>
+            <hr class="mx-auto mt-6 w-24 border-t border-sand-100" />
             <p
-              class="mt-3 text-base text-sand-300"
+              class="mt-4 text-lg font-medium text-sand-100 sm:text-xl/8"
               style="text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)"
             >
               Джошуа Стіл
@@ -297,7 +302,7 @@
               type="button"
               command="--toggle"
               commandfor="certificate-disclosure"
-              class="flex w-full min-h-[44px] items-start justify-between text-left text-sand-900"
+              class="flex w-full min-h-[44px] cursor-pointer items-start justify-between text-left text-sand-900"
             >
               <span class="text-xl font-semibold sm:text-2xl">
                 Як отримати сертифікат
@@ -348,8 +353,8 @@
                     :href="course.registrationUrl"
                     target="_blank"
                     rel="noopener noreferrer"
-                    class="text-sky-blue-600 hover:text-sky-blue-500"
-                    >онлайн-форму реєстрації</a
+                    class="link-inline"
+                    >онлайн-форму реєстрації</
                   >. Після реєстрації ви отримаєте доступ до нашої
                   Viber-спільноти, де публікуються оголошення, матеріали та
                   посилання на тести.
@@ -399,7 +404,7 @@
                   type="button"
                   command="--toggle"
                   :commandfor="'unit-disclosure-' + unit.number"
-                  class="flex w-full min-h-[44px] items-start justify-between text-left text-sand-900"
+                  class="flex w-full min-h-[44px] cursor-pointer items-start justify-between text-left text-sand-900"
                 >
                   <div>
                     <span
