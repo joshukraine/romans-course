@@ -319,10 +319,14 @@
                       class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
                     >
                       <span x-text="unit.passage"></span>
-                      <span aria-hidden="true">·</span>
-                      <span
-                        x-text="unit.lectures.length + ' ' + pluralize(unit.lectures.length, 'лекція', 'лекції', 'лекцій')"
-                      ></span>
+                      <template x-if="unit.lectures.length > 0">
+                        <span>
+                          <span aria-hidden="true">·</span>
+                          <span
+                            x-text="unit.lectures.length + ' ' + pluralize(unit.lectures.length, 'лекція', 'лекції', 'лекцій')"
+                          ></span>
+                        </span>
+                      </template>
                     </div>
                   </div>
                   <span class="ml-6 flex h-7 items-center">
@@ -363,6 +367,11 @@
                 class="contents"
               >
                 <dd class="mt-6 space-y-4">
+                  <template x-if="unit.lectures.length === 0">
+                    <p class="text-sm text-sand-400 italic">
+                      Лекції будуть додані найближчим часом.
+                    </p>
+                  </template>
                   <template
                     x-for="lecture in unit.lectures"
                     :key="lecture.number"
