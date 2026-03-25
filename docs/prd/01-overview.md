@@ -49,8 +49,9 @@
 | --- | --- |
 | Site type | Static HTML (no build step, no SSG) |
 | Hosting | GitHub Pages |
-| CSS | Tailwind CSS via CDN (`<script>` tag) |
-| Interactivity | Alpine.js via CDN (`<script>` tag) |
+| CSS | Tailwind CSS v4 via CDN (`@tailwindcss/browser@4`) |
+| UI components | Tailwind Plus Elements via CDN (`@tailwindplus/elements@1`) — disclosures, dropdowns, dialogs |
+| Data binding | Alpine.js via CDN (`<script defer>` tag) — JSON fetch, templating, conditional rendering |
 | Asset storage | PDF handouts stored directly in the repository |
 | Video hosting | YouTube (embedded or linked) |
 | Quizzes | Google Forms (linked externally) |
@@ -60,8 +61,9 @@
 ### Why These Choices
 
 - **No build step**: The entire site is plain HTML, CSS (via Tailwind CDN), and JS (via Alpine CDN). There is no `npm`, no compilation, no CI pipeline required. Push to `main` and the site is live within minutes.
-- **Tailwind CDN**: Provides the utility-class styling workflow Joshua is familiar with, loaded via a single `<script>` tag. No PostCSS, no config file, no purging — the CDN handles everything.
-- **Alpine.js CDN**: Handles the small amount of interactivity needed (collapsible sections, mobile navigation toggle, possibly accordion-style unit navigation) without a framework. One `<script>` tag, declarative HTML attributes, done.
+- **Tailwind CSS v4 CDN**: Provides the utility-class styling workflow Joshua is familiar with, loaded via a single `<script>` tag. v4 uses `@theme` directives in `<style type="text/tailwindcss">` for custom color palettes (replacing the v3 `tailwind.config` JS object). No PostCSS, no config file, no purging — the CDN handles everything.
+- **Tailwind Plus Elements CDN**: Provides interactive UI component behavior (disclosures, dropdowns, dialogs) from the Tailwind Plus snippet library, with built-in accessibility (ARIA, keyboard nav, focus management). Loaded via a single `<script type="module">` tag. Requires a Tailwind Plus license.
+- **Alpine.js CDN**: Handles data binding — fetching `course.json`, looping over units/lectures, conditional rendering, date formatting. Does not handle UI component behavior (that's Elements). One `<script defer>` tag, declarative HTML attributes, done.
 - **GitHub Pages**: Free, reliable, no subscription dependency, automatic deployment on push, custom domain support. The repo is public since all content is already distributed to students.
 - **PDFs in the repo**: Handout PDFs are small (typically under 2 MB each). Storing them in the repo keeps everything in one place, versioned, and served directly by GitHub Pages. No external storage service needed.
 

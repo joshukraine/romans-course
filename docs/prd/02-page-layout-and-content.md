@@ -80,7 +80,7 @@ This is the primary section of the page, rendered from `course.json`. It display
 
 **Unit level:**
 
-Each unit is presented as a collapsible section (Alpine.js `x-show` with transition). The unit header displays:
+Each unit is presented as a collapsible section using the Tailwind Plus Elements `<el-disclosure>` component, which provides built-in accessibility (ARIA attributes, keyboard navigation) and animated expand/collapse behavior. The unit header displays:
 
 - Unit number and title (e.g., "Розділ 1: Вступ і основи")
 - Scripture passage covered (e.g., "Римлян 1:1–17")
@@ -360,9 +360,10 @@ The custom domain `joshukraine.com` is registered with Namecheap. The domain pre
 | --- | --- | --- |
 | CNAME | www | joshukraine.github.io |
 
-4. In the `romans-course` repository, create a `CNAME` file in the root containing: `joshukraine.com`
-5. In the GitHub repository → Settings → Pages: set custom domain to `joshukraine.com` and enable "Enforce HTTPS"
-6. Wait for DNS propagation and GitHub's automatic SSL certificate provisioning (can take up to an hour)
+4. Create a **user site repository** (`joshukraine.github.io`) with a `CNAME` file containing `joshukraine.com` and a placeholder `index.html`. The custom domain MUST be configured on the user site repo, not on the `romans-course` project repo. This is because GitHub Pages serves project repos at `/<repo-name>/` under the user site's domain — setting the domain on the project repo itself would serve content at the domain root instead of `/romans-course/`.
+5. In the `joshukraine.github.io` repository → Settings → Pages: set custom domain to `joshukraine.com` and enable "Enforce HTTPS"
+6. The `romans-course` repository does NOT have a `CNAME` file or custom domain setting — it is served automatically at `joshukraine.com/romans-course/` as a project page under the user site.
+7. Wait for DNS propagation and GitHub's automatic SSL certificate provisioning (can take up to an hour)
 
 ### Verification
 
@@ -371,7 +372,7 @@ After configuration, verify:
 - `https://joshukraine.com/romans-course/` loads the course page
 - `https://www.joshukraine.com/romans-course/` redirects correctly
 - HTTPS is active (padlock icon in browser)
-- The root `https://joshukraine.com/` shows GitHub's default 404 page (until a root landing page repo is set up — this is expected and acceptable for now)
+- The root `https://joshukraine.com/` shows the user site placeholder page (until a root landing page is built — this is expected and acceptable for now)
 
 ---
 

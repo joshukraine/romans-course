@@ -34,6 +34,8 @@ Each entry records one deviation or decision:
 
 ## Entries
 
+*All entries below were folded back into their respective PRD files on 2026-03-25 at the Phase 1 boundary.*
+
 ### 2026-03-24 — 02-page-layout-and-content.md §11 "Custom Domain Configuration"
 
 **What changed:** Custom domain (`joshukraine.com`) is configured on the `joshukraine.github.io` user site repo, not on the `romans-course` project repo. The `romans-course` repo has no CNAME file and no custom domain setting. The course page is served at `joshukraine.com/romans-course/` automatically as a GitHub Pages project page under the user site's domain.
