@@ -98,7 +98,13 @@
               const hash = window.location.hash;
               if (hash) {
                 const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                if (el) {
+                  const disclosure = el.closest('el-disclosure');
+                  if (disclosure && disclosure.hidden) {
+                    disclosure.removeAttribute('hidden');
+                  }
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
               }
             });
           });
