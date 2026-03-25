@@ -218,6 +218,7 @@ The JSON file is the single source of truth for all course content metadata. The
 | `date` | string (ISO 8601) | MUST | Lecture date in `YYYY-MM-DD` format. Displayed in Ukrainian locale format on the page. |
 | `passage` | string | SHOULD | Scripture passage covered in this specific lecture. May overlap with but be more specific than the unit passage. |
 | `status` | string | MAY | `"published"` (default if absent) or `"upcoming"`. Controls which elements are displayed. |
+| `summary` | string or null | MAY | 2–3 sentence topic summary displayed below the video thumbnail. Null or absent to hide the section. |
 | `videoUrl` | string or null | MUST for published | YouTube video URL. Null for upcoming lectures. |
 | `handouts` | array | MUST | Array of handout objects. MAY be empty. |
 | `quizUrl` | string or null | MAY | Google Forms quiz URL. Null or absent if no quiz exists for this lecture. |
