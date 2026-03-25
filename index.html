@@ -319,10 +319,14 @@
                       class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
                     >
                       <span x-text="unit.passage"></span>
-                      <span aria-hidden="true">·</span>
-                      <span
-                        x-text="unit.lectures.length + ' ' + pluralize(unit.lectures.length, 'лекція', 'лекції', 'лекцій')"
-                      ></span>
+                      <template x-if="unit.lectures.length > 0">
+                        <span>
+                          <span aria-hidden="true">·</span>
+                          <span
+                            x-text="unit.lectures.length + ' ' + pluralize(unit.lectures.length, 'лекція', 'лекції', 'лекцій')"
+                          ></span>
+                        </span>
+                      </template>
                     </div>
                   </div>
                   <span class="ml-6 flex h-7 items-center">
@@ -359,10 +363,15 @@
               </dt>
               <el-disclosure
                 :id="'unit-disclosure-' + unit.number"
-                :hidden="unitIndex !== units.length - 1"
+                :hidden="unitIndex !== units.findLastIndex(u => u.lectures.length > 0)"
                 class="contents"
               >
                 <dd class="mt-6 space-y-4">
+                  <template x-if="unit.lectures.length === 0">
+                    <p class="text-sm text-sand-400 italic">
+                      Лекції будуть додані найближчим часом.
+                    </p>
+                  </template>
                   <template
                     x-for="lecture in unit.lectures"
                     :key="lecture.number"
@@ -487,6 +496,25 @@
                               </svg>
                               Пройти тест
                             </a>
+                          </template>
+                          <template x-if="!lecture.quizUrl">
+                            <span
+                              class="inline-flex items-center gap-x-2 rounded-md bg-sand-100 px-3 py-2.5 text-sm text-sand-400"
+                            >
+                              <svg
+                                viewBox="0 0 20 20"
+                                fill="currentColor"
+                                aria-hidden="true"
+                                class="size-4 shrink-0"
+                              >
+                                <path
+                                  fill-rule="evenodd"
+                                  d="M4.5 2A1.5 1.5 0 0 0 3 3.5v13A1.5 1.5 0 0 0 4.5 18h11a1.5 1.5 0 0 0 1.5-1.5V7.621a1.5 1.5 0 0 0-.44-1.06l-4.12-4.122A1.5 1.5 0 0 0 11.378 2H4.5Zm2.25 8.5a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Zm0 3a.75.75 0 0 0 0 1.5h6.5a.75.75 0 0 0 0-1.5h-6.5Z"
+                                  clip-rule="evenodd"
+                                />
+                              </svg>
+                              Тест буде додано
+                            </span>
                           </template>
                         </div>
                       </template>
