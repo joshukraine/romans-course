@@ -286,6 +286,86 @@
       </div>
     </section>
 
+    <!-- Certificate completion -->
+    <section class="bg-sand-50">
+      <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+        <div class="border-b border-sand-200 pb-8">
+          <dt>
+            <button
+              type="button"
+              command="--toggle"
+              commandfor="certificate-disclosure"
+              class="flex w-full min-h-[44px] items-start justify-between text-left text-sand-900"
+            >
+              <span class="text-xl font-semibold sm:text-2xl">
+                Як отримати сертифікат
+              </span>
+              <span class="ml-6 flex h-7 items-center">
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                  class="size-6 text-sand-400 in-aria-expanded:hidden"
+                >
+                  <path
+                    d="M12 6v12m6-6H6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                  class="size-6 text-sand-400 not-in-aria-expanded:hidden"
+                >
+                  <path
+                    d="M18 12H6"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </span>
+            </button>
+          </dt>
+          <el-disclosure id="certificate-disclosure" hidden class="contents">
+            <dd class="mt-6 space-y-4 text-base/7 text-sand-700">
+              <p>
+                Відеолекції курсу доступні безкоштовно для всіх. Однак, якщо ви
+                хочете пройти курс повністю та отримати сертифікат про
+                завершення, виконайте три кроки:
+              </p>
+              <ol class="list-decimal space-y-3 pl-6">
+                <li>
+                  <strong>Зареєструйтесь на курс.</strong> Заповніть
+                  онлайн-форму реєстрації. Після реєстрації ви отримаєте доступ
+                  до нашої Viber-спільноти, де публікуються оголошення, матеріали
+                  та посилання на тести.
+                </li>
+                <li>
+                  <strong>Перегляньте всі лекції.</strong> Ви можете відвідувати
+                  заняття особисто або переглядати відеозаписи онлайн — або
+                  поєднувати обидва варіанти.
+                </li>
+                <li>
+                  <strong>Складіть усі тести.</strong> Після кожної лекції
+                  потрібно пройти короткий тест. Мінімальний прохідний бал — 70%.
+                </li>
+              </ol>
+              <p>
+                Після виконання всіх трьох кроків ви отримаєте сертифікат про
+                завершення курсу.
+              </p>
+            </dd>
+          </el-disclosure>
+        </div>
+      </div>
+    </section>
+
     <!-- Course content -->
     <main class="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
       <template x-if="loading">
