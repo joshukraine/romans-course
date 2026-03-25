@@ -1,25 +1,25 @@
-# Romans Course Page
+# Відкриваємо Римлян / Discovering Romans
 
-A static, mobile-friendly website serving as the central hub for all materials in Joshua Steele's expository course on the Book of Romans, taught at an evangelical church in Lviv, Ukraine. Students use the site to find lecture videos, download handouts, and access quizzes.
+A static, mobile-friendly website serving as the central hub for all materials in Joshua Steele's **Відкриваємо Римлян** (Discovering Romans) — an expository course on the Book of Romans, taught at Greater Grace evangelical church in Lviv, Ukraine. Students use the site to find lecture videos, download handouts, and access quizzes.
 
-**Tech stack:** Plain HTML, Tailwind CSS (CDN), Alpine.js (CDN), hosted on GitHub Pages. No build step — push to `main` and the site is live.
+**Tech stack:** Plain HTML, Tailwind CSS v4 (CDN), Tailwind Plus Elements (CDN), Alpine.js (CDN), hosted on GitHub Pages. No build step — push to `main` and the site is live.
 
 **Live site:** [joshukraine.com/romans-course/](https://joshukraine.com/romans-course/)
 
 ## Content Structure
 
-The course is organized hierarchically:
+The course is organized into 7 units covering Romans 1–16, with lectures delivered monthly (two 45-minute sessions per meeting):
 
 - **Course** → 7 units
   - **Unit** → multiple lectures (numbered continuously across the course)
-    - **Lecture** → YouTube video, PDF handouts, optional quiz link
+    - **Lecture** → YouTube video, topic summary, PDF handouts, quiz link
 
 All content metadata lives in `data/course.json`. The HTML page reads this file and renders everything dynamically with Alpine.js.
 
 ## Adding a New Lecture
 
 1. Drop handout PDFs into `handouts/`, following the naming convention `lecture-{NN}-{descriptive-slug}.pdf`
-2. Edit `data/course.json` — add a lecture object to the appropriate unit's `lectures` array with title, date, video URL, handout references, and quiz URL
+2. Edit `data/course.json` — add a lecture object to the appropriate unit's `lectures` array with title, date, summary, video URL, handout references, and quiz URL
 3. Commit and push to `main`
 4. Verify on the live site — the new lecture appears automatically
 
@@ -50,6 +50,6 @@ Detailed product requirements and implementation roadmap live in `docs/prd/`. St
 This project uses a split license:
 
 - **Code** (HTML, CSS, JavaScript, configuration files): [MIT License](LICENSE)
-- **Course content** (PDF handouts, lecture descriptions, quiz content, course metadata in `course.json`): Copyright (c) 2025 Joshua Steele. All rights reserved.
+- **Course content** (PDF handouts, lecture descriptions, quiz content, course metadata in `course.json`): Copyright (c) 2026 Joshua Steele. All rights reserved.
 
 The hero image is by [Spencer Davis on Unsplash](https://unsplash.com/photos/ilQmlVIMN4c) and is used under the [Unsplash License](https://unsplash.com/license).
