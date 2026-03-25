@@ -4,6 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Послання до Римлян — Експозиційний курс</title>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://img.youtube.com" />
 
     <!-- Open Graph -->
     <meta property="og:title" content="Послання до Римлян — Експозиційний курс" />
@@ -87,9 +89,24 @@
       course: {},
       units: [],
       loading: true,
+      error: false,
+      dateFmt: new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' }),
+      videoId(url) {
+        const m = url.match(/(?:[?&]v=|youtu\.be\/)([^&?/]+)/);
+        return m ? m[1] : '';
+      },
+      pluralize(n, one, few, many) {
+        const mod10 = n % 10, mod100 = n % 100;
+        if (mod10 === 1 && mod100 !== 11) return one;
+        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
+        return many;
+      },
       init() {
         fetch('data/course.json')
-          .then(res => res.json())
+          .then(res => {
+            if (!res.ok) throw new Error(res.status);
+            return res.json();
+          })
           .then(data => {
             this.course = data.course;
             this.units = data.units;
@@ -107,6 +124,10 @@
                 }
               }
             });
+          })
+          .catch(() => {
+            this.loading = false;
+            this.error = true;
           });
       }
     }"
@@ -212,6 +233,9 @@
       <img
         src="assets/img/hero.jpg"
         alt="Партенон в Афінах"
+        width="1600"
+        height="1067"
+        fetchpriority="high"
         class="absolute inset-0 -z-10 size-full object-cover"
       />
       <div class="absolute inset-0 -z-10 bg-sand-900/60"></div>
@@ -274,8 +298,13 @@
       <template x-if="loading">
         <p class="text-center text-lg text-sand-500">Завантаження...</p>
       </template>
-      <template x-if="!loading">
-        <div class="divide-y divide-sand-200">
+      <template x-if="error">
+        <p class="text-center text-lg text-sand-500">
+          Не вдалося завантажити дані курсу. Спробуйте оновити сторінку.
+        </p>
+      </template>
+      <template x-if="!loading && !error">
+        <dl class="divide-y divide-sand-200">
           <template x-for="(unit, unitIndex) in units" :key="unit.number">
             <div
               :id="'unit-' + unit.number"
@@ -299,7 +328,7 @@
                       <span x-text="unit.passage"></span>
                       <span aria-hidden="true">·</span>
                       <span
-                        x-text="unit.lectures.length + ' ' + (unit.lectures.length === 1 ? 'лекція' : unit.lectures.length < 5 ? 'лекції' : 'лекцій')"
+                        x-text="unit.lectures.length + ' ' + pluralize(unit.lectures.length, 'лекція', 'лекції', 'лекцій')"
                       ></span>
                     </div>
                   </div>
@@ -360,7 +389,7 @@
                           >
                             <time
                               :datetime="lecture.date"
-                              x-text="new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' }).format(new Date(lecture.date + 'T00:00:00'))"
+                              x-text="dateFmt.format(new Date(lecture.date + 'T00:00:00'))"
                             ></time>
                             <template x-if="lecture.passage">
                               <span>
@@ -386,7 +415,6 @@
                         x-if="lecture.status !== 'upcoming'"
                       >
                         <div class="mt-4 space-y-3">
-                          <!-- Video thumbnail -->
                           <template x-if="lecture.videoUrl">
                             <a
                               :href="lecture.videoUrl"
@@ -395,7 +423,7 @@
                               class="group relative block overflow-hidden rounded-md"
                             >
                               <img
-                                :src="'https://img.youtube.com/vi/' + (lecture.videoUrl.match(/[?&]v=([^&]+)/) || lecture.videoUrl.match(/youtu\.be\/([^?]+)/) || [,''])[1] + '/mqdefault.jpg'"
+                                :src="'https://img.youtube.com/vi/' + videoId(lecture.videoUrl) + '/mqdefault.jpg'"
                                 :alt="'Відео: ' + lecture.title"
                                 class="w-full object-cover"
                                 loading="lazy"
@@ -419,7 +447,6 @@
                             </a>
                           </template>
 
-                          <!-- Handouts -->
                           <template x-if="lecture.handouts.length > 0">
                             <div class="space-y-1">
                               <template
@@ -450,7 +477,6 @@
                             </div>
                           </template>
 
-                          <!-- Quiz -->
                           <template x-if="lecture.quizUrl">
                             <a
                               :href="lecture.quizUrl"
@@ -481,7 +507,7 @@
               </el-disclosure>
             </div>
           </template>
-        </div>
+        </dl>
       </template>
     </main>
 
