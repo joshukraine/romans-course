@@ -79,7 +79,7 @@ Populate with real course data, apply content updates, and prepare for sharing w
 - [x] Update course structure: expand to all 7 units with real titles and passages
 - [x] Add real YouTube video URLs to lectures 1–4
 - [x] Handle empty units (3–7): show "Лекції будуть додані" message, hide lecture count
-- [ ] Add certificate completion section ("Як отримати сертифікат") between intro and course content
+- [x] Add certificate completion section ("Як отримати сертифікат") between intro and course content
 - [ ] Add social media icons to footer (Facebook, X, YouTube, GitHub)
 
 ### Content population
