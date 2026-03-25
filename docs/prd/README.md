@@ -16,6 +16,7 @@ This directory contains the modular PRD for the Romans Course Page. Each file is
 | `ROADMAP.md` | Implementation phases, progress tracking | Planning sprints, checking phase boundaries |
 | `01-overview.md` | Vision, personas, design principles, tech stack | Onboarding to the project, understanding goals |
 | `02-page-layout-and-content.md` | Page layout, navigation, data model (`course.json` schema), content update workflow, responsive behavior, visual design | Building any part of the page, adding or modifying content structure |
+| `romans-course-content-updates.md` | Post-Phase 1 content updates: new course title, full 7-unit structure, real video links, certificate section, social footer links | Implementing content changes during Phase 2 |
 
 ## Conventions
 

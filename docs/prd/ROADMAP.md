@@ -67,15 +67,30 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 
 ## Phase 2 — Content Population and Launch
 
-Populate with real course data, add all existing handout PDFs, and prepare for sharing with students.
+Populate with real course data, apply content updates, and prepare for sharing with students.
 
-- [ ] Populate `course.json` with Unit 1 lectures (1–2): real titles, dates, YouTube URLs, handout references
-- [ ] Populate `course.json` with Unit 2 lectures (3–4): real titles, dates, YouTube URLs, handout references
+### Content updates (→ See `romans-course-content-updates.md`)
+
+- [ ] Update course title to "Відкриваємо Римлян" across hero, nav, meta tags, and `course.json`
+- [ ] Update hero layout: three-line hierarchy (title, subtitle, instructor name)
+- [ ] Update course description with church name and revised text
+- [ ] Remove Viber community link (access now tied to registration)
+- [ ] Update copyright year to dynamic `new Date().getFullYear()`
+- [ ] Update course structure: expand to all 7 units with real titles and passages
+- [ ] Add real YouTube video URLs to lectures 1–4
+- [ ] Handle empty units (3–7): show "Лекції будуть додані" message, hide lecture count
+- [ ] Add certificate completion section ("Як отримати сертифікат") between intro and course content
+- [ ] Add social media icons to footer (Facebook, X, YouTube, GitHub)
+
+### Content population
+
 - [ ] Add all existing handout PDFs to `handouts/` with correct naming convention
-- [ ] Add any upcoming lectures (5–6) with `"status": "upcoming"` if details are known
 - [ ] Add quiz URLs if quizzes are ready; otherwise leave as `null`
+
+### Verification and launch
+
 - [ ] Test all links: YouTube videos open correctly, PDFs download, quiz links work
-- [ ] Test on mobile: Viber link → phone browser flow, navigation, handout downloads, overall appearance
+- [ ] Test on mobile: navigation, handout downloads, overall appearance
 - [ ] Test anchor link sharing: verify `#lecture-N` URLs scroll to the correct lecture after page load
 - [ ] Test social sharing preview: share the URL in Viber and Telegram, verify OG image and description render correctly
 - [ ] Verify Umami is tracking page views in the dashboard
@@ -83,7 +98,7 @@ Populate with real course data, add all existing handout PDFs, and prepare for s
 - [ ] Update `README.md` with final content update instructions and domain configuration notes
 - [ ] Share the URL with the Viber community
 
-**PRD references:** `02-page-layout-and-content.md` §4–§5, §8–§11; `01-overview.md` §Content Structure
+**PRD references:** `romans-course-content-updates.md`; `02-page-layout-and-content.md` §4–§5, §8–§11; `01-overview.md` §Content Structure
 
 ---
 
