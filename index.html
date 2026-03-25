@@ -77,6 +77,62 @@
       src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
       type="module"
     ></script>
+    <script>
+      document.addEventListener("alpine:init", () => {
+        Alpine.data("courseApp", () => ({
+          course: {},
+          units: [],
+          loading: true,
+          error: false,
+          dateFmt: new Intl.DateTimeFormat("uk-UA", {
+            day: "numeric",
+            month: "long",
+            year: "numeric",
+          }),
+          videoId(url) {
+            const m = url.match(/(?:[?&]v=|youtu\.be\/)([^&?/]+)/);
+            return m ? m[1] : "";
+          },
+          pluralize(n, one, few, many) {
+            const mod10 = n % 10,
+              mod100 = n % 100;
+            if (mod10 === 1 && mod100 !== 11) return one;
+            if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14))
+              return few;
+            return many;
+          },
+          init() {
+            fetch("data/course.json")
+              .then((res) => {
+                if (!res.ok) throw new Error(res.status);
+                return res.json();
+              })
+              .then((data) => {
+                this.course = data.course;
+                this.units = data.units;
+                this.loading = false;
+                this.$nextTick(() => {
+                  const hash = window.location.hash;
+                  if (hash) {
+                    const el = document.querySelector(hash);
+                    if (el) {
+                      const disclosure = el.closest("el-disclosure");
+                      if (disclosure && disclosure.hidden) {
+                        disclosure.removeAttribute("hidden");
+                      }
+                      el.scrollIntoView({ behavior: "smooth" });
+                    }
+                  }
+                });
+              })
+              .catch(() => {
+                this.loading = false;
+                this.error = true;
+              });
+          },
+        }));
+      });
+    </script>
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.3/dist/cdn.min.js"
@@ -87,55 +143,7 @@
       data-website-id="81aa77d9-0c13-4656-a7a6-4e8c428484f5"
     ></script>
   </head>
-  <body
-    class="bg-sand-50 text-sand-800"
-    x-data="{
-      course: {},
-      units: [],
-      loading: true,
-      error: false,
-      dateFmt: new Intl.DateTimeFormat('uk-UA', { day: 'numeric', month: 'long', year: 'numeric' }),
-      videoId(url) {
-        const m = url.match(/(?:[?&]v=|youtu\.be\/)([^&?/]+)/);
-        return m ? m[1] : '';
-      },
-      pluralize(n, one, few, many) {
-        const mod10 = n % 10, mod100 = n % 100;
-        if (mod10 === 1 && mod100 !== 11) return one;
-        if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return few;
-        return many;
-      },
-      init() {
-        fetch('data/course.json')
-          .then(res => {
-            if (!res.ok) throw new Error(res.status);
-            return res.json();
-          })
-          .then(data => {
-            this.course = data.course;
-            this.units = data.units;
-            this.loading = false;
-            this.$nextTick(() => {
-              const hash = window.location.hash;
-              if (hash) {
-                const el = document.querySelector(hash);
-                if (el) {
-                  const disclosure = el.closest('el-disclosure');
-                  if (disclosure && disclosure.hidden) {
-                    disclosure.removeAttribute('hidden');
-                  }
-                  el.scrollIntoView({ behavior: 'smooth' });
-                }
-              }
-            });
-          })
-          .catch(() => {
-            this.loading = false;
-            this.error = true;
-          });
-      }
-    }"
-  >
+  <body class="bg-sand-50 text-sand-800" x-data="courseApp">
     <!-- Navigation bar -->
     <header class="sticky top-0 z-50 bg-sand-100/95 backdrop-blur-sm shadow-sm">
       <nav
