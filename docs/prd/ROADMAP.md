@@ -10,7 +10,7 @@ This document tracks implementation progress through phased delivery. Phases are
 | ----- | ----------------------------- | ------------ | ----------- |
 | 0     | Project Foundation            | —            | Complete    |
 | 1     | Core Page Structure           | Phase 0      | Complete    |
-| 2     | Content Population and Launch | Phase 1      | Not started |
+| 2     | Content Population and Launch | Phase 1      | In progress |
 
 ---
 
@@ -84,7 +84,7 @@ Populate with real course data, apply content updates, and prepare for sharing w
 
 ### Content population
 
-- [ ] Add all existing handout PDFs to `handouts/` with correct naming convention
+- [x] Add all existing handout PDFs to `handouts/` with correct naming convention
 - [ ] Add quiz URLs if quizzes are ready; otherwise leave as `null`
 
 ### Verification and launch
@@ -95,7 +95,7 @@ Populate with real course data, apply content updates, and prepare for sharing w
 - [ ] Test social sharing preview: share the URL in Viber and Telegram, verify OG image and description render correctly
 - [ ] Verify Umami is tracking page views in the dashboard
 - [ ] Verify custom domain is fully operational: HTTPS active, `www` redirect works, `joshukraine.com/romans-course/` loads correctly
-- [ ] Update `README.md` with final content update instructions and domain configuration notes
+- [x] Update `README.md` with final content update instructions and domain configuration notes
 - [ ] Share the URL with the Viber community
 
 **PRD references:** `romans-course-content-updates.md`; `02-page-layout-and-content.md` §4–§5, §8–§11; `01-overview.md` §Content Structure
