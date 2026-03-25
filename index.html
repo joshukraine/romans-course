@@ -98,7 +98,13 @@
               const hash = window.location.hash;
               if (hash) {
                 const el = document.querySelector(hash);
-                if (el) el.scrollIntoView({ behavior: 'smooth' });
+                if (el) {
+                  const disclosure = el.closest('el-disclosure');
+                  if (disclosure && disclosure.hidden) {
+                    disclosure.removeAttribute('hidden');
+                  }
+                  el.scrollIntoView({ behavior: 'smooth' });
+                }
               }
             });
           });
@@ -331,7 +337,7 @@
               </dt>
               <el-disclosure
                 :id="'unit-disclosure-' + unit.number"
-                :hidden="unitIndex !== units.length - 1 ? true : undefined"
+                :hidden="unitIndex !== units.length - 1"
                 class="contents"
               >
                 <dd class="mt-6 space-y-4">
