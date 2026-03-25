@@ -12,39 +12,83 @@
   "units": [
     {
       "number": 1,
-      "title": "Вступ і основи",
+      "title": "Вступ та основи",
       "passage": "Римлян 1:1–17",
       "lectures": [
         {
           "number": 1,
-          "title": "Огляд курсу та методологія вивчення Біблії",
+          "title": "Вступ до Послання до Римлян",
           "date": "2025-01-25",
-          "passage": "Римлян 1:1–7",
+          "passage": "Римлян 1:1–17",
           "status": "published",
-          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "videoUrl": "https://youtu.be/rrOyUwlCaa8",
           "handouts": [
             {
-              "title": "Методологія вивчення Біблії (10 пунктів)",
-              "file": "handouts/lecture-01-bible-study-methodology.pdf"
+              "title": "22 питання для вивчення Біблії",
+              "file": "handouts/lecture-01-22-questions.pdf"
+            },
+            {
+              "title": "Теми та структура Послання до Римлян",
+              "file": "handouts/lecture-01-themes-and-structure.pdf"
             }
           ],
-          "quizUrl": "https://forms.google.com/placeholder-quiz-1"
+          "quizUrl": null
         },
         {
           "number": 2,
-          "title": "Привітання Павла та тема послання",
+          "title": "Римлян 1:1–17",
           "date": "2025-01-25",
-          "passage": "Римлян 1:8–17",
+          "passage": "Римлян 1:1–17",
           "status": "published",
-          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
+          "videoUrl": "https://youtu.be/fzlRLtoOdt8",
+          "handouts": [],
+          "quizUrl": null
+        }
+      ]
+    },
+    {
+      "number": 2,
+      "title": "Всезагальна потреба в праведності",
+      "passage": "Римлян 1:18–3:20",
+      "lectures": [
+        {
+          "number": 3,
+          "title": "Римлян 1:18",
+          "date": "2025-02-22",
+          "passage": "Римлян 1:18",
+          "status": "published",
+          "videoUrl": "https://youtu.be/Wock8Xoh7Vs",
           "handouts": [
             {
-              "title": "Структура Послання до Римлян",
-              "file": "handouts/lecture-02-romans-structure.pdf"
+              "title": "Чотири-крокова структура аналізу",
+              "file": "handouts/lecture-03-four-point-framework.pdf"
             },
             {
-              "title": "Тема послання — Римлян 1:16–17",
-              "file": "handouts/lecture-02-theme-verse.pdf"
+              "title": "Слово κατέχω — дослідження",
+              "file": "handouts/lecture-03-katecho-word-study.pdf"
+            },
+            {
+              "title": "Діаграма стовпів — Римлян 1:18",
+              "file": "handouts/lecture-03-pillar-diagram.pdf"
+            },
+            {
+              "title": "Розеттський камінь — Римлян 1:18–32",
+              "file": "handouts/lecture-03-rosetta-stone.pdf"
+            }
+          ],
+          "quizUrl": null
+        },
+        {
+          "number": 4,
+          "title": "Римлян 1:19–25",
+          "date": "2025-02-22",
+          "passage": "Римлян 1:19–25",
+          "status": "published",
+          "videoUrl": "https://youtu.be/NfcWHRe4gUc",
+          "handouts": [
+            {
+              "title": "Сходинки деградації — Римлян 1:19–25",
+              "file": "handouts/lecture-04-descent-staircase.pdf"
             }
           ],
           "quizUrl": null
@@ -52,36 +96,34 @@
       ]
     },
     {
-      "number": 2,
-      "title": "Гнів Божий об'явлений",
-      "passage": "Римлян 1:18–3:20",
-      "lectures": [
-        {
-          "number": 3,
-          "title": "Гнів Божий проти нечестивості",
-          "date": "2025-02-22",
-          "passage": "Римлян 1:18–32",
-          "status": "published",
-          "videoUrl": "https://www.youtube.com/watch?v=dQw4w9WgXcQ",
-          "handouts": [
-            {
-              "title": "Слово κατέχω — дослідження",
-              "file": "handouts/lecture-03-katecho-word-study.pdf"
-            }
-          ],
-          "quizUrl": null
-        },
-        {
-          "number": 4,
-          "title": "Суд Божий — Римлян 2:1–16",
-          "date": "2025-02-22",
-          "passage": "Римлян 2:1–16",
-          "status": "upcoming",
-          "videoUrl": null,
-          "handouts": [],
-          "quizUrl": null
-        }
-      ]
+      "number": 3,
+      "title": "Виправдання вірою",
+      "passage": "Римлян 3:21–5:21",
+      "lectures": []
+    },
+    {
+      "number": 4,
+      "title": "Освячення та єднання з Христом",
+      "passage": "Римлян 6–8",
+      "lectures": []
+    },
+    {
+      "number": 5,
+      "title": "Божа суверенність та Ізраїль",
+      "passage": "Римлян 9–11",
+      "lectures": []
+    },
+    {
+      "number": 6,
+      "title": "Практичне християнське життя",
+      "passage": "Римлян 12:1–15:13",
+      "lectures": []
+    },
+    {
+      "number": 7,
+      "title": "Особисті питання та заключення",
+      "passage": "Римлян 15:14–16:27",
+      "lectures": []
     }
   ]
 }
