@@ -96,6 +96,27 @@
               setTimeout(() => (this.copiedLecture = null), 2000);
             });
           },
+          expandUnit(unitNumber) {
+            const disclosure = document.getElementById(
+              "unit-disclosure-" + unitNumber,
+            );
+            if (disclosure && disclosure.hidden) {
+              disclosure.removeAttribute("hidden");
+            }
+          },
+          scrollToHash(hash) {
+            const el = document.querySelector(hash);
+            if (!el) return;
+            const disclosure = el.closest("el-disclosure");
+            if (disclosure && disclosure.hidden) {
+              disclosure.removeAttribute("hidden");
+            }
+            const childDisclosure = el.querySelector("el-disclosure");
+            if (childDisclosure && childDisclosure.hidden) {
+              childDisclosure.removeAttribute("hidden");
+            }
+            el.scrollIntoView({ behavior: "smooth" });
+          },
           dateFmt: new Intl.DateTimeFormat("uk-UA", {
             day: "numeric",
             month: "long",
@@ -124,16 +145,8 @@
                 this.units = data.units;
                 this.loading = false;
                 this.$nextTick(() => {
-                  const hash = window.location.hash;
-                  if (hash) {
-                    const el = document.querySelector(hash);
-                    if (el) {
-                      const disclosure = el.closest("el-disclosure");
-                      if (disclosure && disclosure.hidden) {
-                        disclosure.removeAttribute("hidden");
-                      }
-                      el.scrollIntoView({ behavior: "smooth" });
-                    }
+                  if (window.location.hash) {
+                    this.scrollToHash(window.location.hash);
                   }
                 });
               })
@@ -195,6 +208,7 @@
               :href="'#unit-' + unit.number"
               class="text-sm/6 font-semibold text-sand-700 hover:text-sky-blue-600"
               x-text="'Розділ ' + unit.number"
+              @click="expandUnit(unit.number)"
             ></a>
           </template>
         </div>
@@ -241,7 +255,7 @@
                       :href="'#unit-' + unit.number"
                       class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
                       x-text="'Розділ ' + unit.number + ': ' + unit.title"
-                      @click="document.getElementById('mobile-menu').close()"
+                      @click="document.getElementById('mobile-menu').close(); expandUnit(unit.number)"
                     ></a>
                   </template>
                 </div>
