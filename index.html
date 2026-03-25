@@ -363,7 +363,7 @@
               </dt>
               <el-disclosure
                 :id="'unit-disclosure-' + unit.number"
-                :hidden="unitIndex !== units.length - 1"
+                :hidden="unitIndex !== units.findLastIndex(u => u.lectures.length > 0)"
                 class="contents"
               >
                 <dd class="mt-6 space-y-4">
