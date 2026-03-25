@@ -9,7 +9,7 @@ This document tracks implementation progress through phased delivery. Phases are
 | Phase | Name                          | Dependencies | Status      |
 | ----- | ----------------------------- | ------------ | ----------- |
 | 0     | Project Foundation            | —            | Complete    |
-| 1     | Core Page Structure           | Phase 0      | In progress |
+| 1     | Core Page Structure           | Phase 0      | Complete    |
 | 2     | Content Population and Launch | Phase 1      | Not started |
 
 ---
@@ -55,11 +55,11 @@ Build the functional page: data-driven rendering, navigation, responsive layout,
 - [x] Implement desktop navigation: horizontal unit anchor links in the navigation bar
 - [x] Implement mobile navigation: hamburger toggle with dropdown unit links (Alpine.js)
 - [x] Implement smooth scroll for unit anchor links, accounting for sticky header offset
-- [ ] Implement responsive layout: mobile-first, max-width content area on desktop, readable spacing
+- [x] Implement responsive layout: mobile-first, max-width content area on desktop, readable spacing
 - [x] Implement footer: teacher name, organization link, copyright, Unsplash photo attribution
 - [x] Add Open Graph and Twitter Card meta tags in `<head>`
 - [x] Add Umami analytics tracking script in `<head>`
-- [ ] Style the page: beige/blue color palette, typography, card styling, whitespace, icons (per §7 design direction)
+- [x] Style the page: beige/blue color palette, typography, card styling, whitespace, icons (per §7 design direction)
 
 **PRD references:** `02-page-layout-and-content.md` §2–§9
 
