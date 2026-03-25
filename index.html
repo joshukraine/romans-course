@@ -8,7 +8,10 @@
     <link rel="preconnect" href="https://img.youtube.com" />
 
     <!-- Open Graph -->
-    <meta property="og:title" content="Послання до Римлян — Експозиційний курс" />
+    <meta
+      property="og:title"
+      content="Послання до Римлян — Експозиційний курс"
+    />
     <meta
       property="og:description"
       content="Експозиційний курс з вивчення Послання до Римлян. Лекції, конспекти та тести."
@@ -17,10 +20,7 @@
       property="og:image"
       content="https://joshukraine.com/romans-course/assets/img/og-image.jpg"
     />
-    <meta
-      property="og:url"
-      content="https://joshukraine.com/romans-course/"
-    />
+    <meta property="og:url" content="https://joshukraine.com/romans-course/" />
     <meta property="og:type" content="website" />
     <meta property="og:locale" content="uk_UA" />
 
@@ -398,9 +398,7 @@
                               </span>
                             </template>
                           </div>
-                          <template
-                            x-if="lecture.status === 'upcoming'"
-                          >
+                          <template x-if="lecture.status === 'upcoming'">
                             <span
                               class="mt-2 inline-block rounded-md bg-sand-100 px-2 py-0.5 text-xs font-medium text-sand-600"
                             >
@@ -411,9 +409,7 @@
                       </div>
 
                       <!-- Video, handouts, quiz — only for published lectures -->
-                      <template
-                        x-if="lecture.status !== 'upcoming'"
-                      >
+                      <template x-if="lecture.status !== 'upcoming'">
                         <div class="mt-4 space-y-3">
                           <template x-if="lecture.videoUrl">
                             <a
