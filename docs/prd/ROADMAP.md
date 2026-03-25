@@ -71,11 +71,11 @@ Populate with real course data, apply content updates, and prepare for sharing w
 
 ### Content updates (→ See `romans-course-content-updates.md`)
 
-- [ ] Update course title to "Відкриваємо Римлян" across hero, nav, meta tags, and `course.json`
-- [ ] Update hero layout: three-line hierarchy (title, subtitle, instructor name)
-- [ ] Update course description with church name and revised text
-- [ ] Remove Viber community link (access now tied to registration)
-- [ ] Update copyright year to dynamic `new Date().getFullYear()`
+- [x] Update course title to "Відкриваємо Римлян" across hero, nav, meta tags, and `course.json`
+- [x] Update hero layout: three-line hierarchy (title, subtitle, instructor name)
+- [x] Update course description with church name and revised text
+- [x] Remove Viber community link (access now tied to registration)
+- [x] Update copyright year to dynamic `new Date().getFullYear()`
 - [ ] Update course structure: expand to all 7 units with real titles and passages
 - [ ] Add real YouTube video URLs to lectures 1–4
 - [ ] Handle empty units (3–7): show "Лекції будуть додані" message, hide lecture count
