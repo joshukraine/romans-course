@@ -289,7 +289,9 @@
     <!-- Certificate completion -->
     <section class="bg-sand-50">
       <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <div class="border-b border-sand-200 pb-8">
+        <div
+          class="rounded-lg border border-sand-200 bg-sand-100 p-6 sm:p-8"
+        >
           <dt>
             <button
               type="button"
@@ -342,9 +344,15 @@
               <ol class="list-decimal space-y-3 pl-6">
                 <li>
                   <strong>Зареєструйтесь на курс.</strong> Заповніть
-                  онлайн-форму реєстрації. Після реєстрації ви отримаєте доступ
-                  до нашої Viber-спільноти, де публікуються оголошення, матеріали
-                  та посилання на тести.
+                  <a
+                    :href="course.registrationUrl"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    class="text-sky-blue-600 hover:text-sky-blue-500"
+                    >онлайн-форму реєстрації</a
+                  >. Після реєстрації ви отримаєте доступ до нашої
+                  Viber-спільноти, де публікуються оголошення, матеріали та
+                  посилання на тести.
                 </li>
                 <li>
                   <strong>Перегляньте всі лекції.</strong> Ви можете відвідувати
@@ -368,6 +376,9 @@
 
     <!-- Course content -->
     <main class="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
+      <h2 class="mb-8 text-2xl font-semibold text-sand-900 sm:text-3xl">
+        Зміст курсу
+      </h2>
       <template x-if="loading">
         <p class="text-center text-lg text-sand-500">Завантаження...</p>
       </template>
