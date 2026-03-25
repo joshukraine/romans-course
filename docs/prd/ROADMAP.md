@@ -9,7 +9,7 @@ This document tracks implementation progress through phased delivery. Phases are
 | Phase | Name                          | Dependencies | Status      |
 | ----- | ----------------------------- | ------------ | ----------- |
 | 0     | Project Foundation            | —            | Complete    |
-| 1     | Core Page Structure           | Phase 0      | Not started |
+| 1     | Core Page Structure           | Phase 0      | In progress |
 | 2     | Content Population and Launch | Phase 1      | Not started |
 
 ---
