@@ -85,16 +85,16 @@ Populate with real course data, apply content updates, and prepare for sharing w
 ### Content population
 
 - [x] Add all existing handout PDFs to `handouts/` with correct naming convention
-- [ ] Add quiz URLs if quizzes are ready; otherwise leave as `null`
+- [x] Add quiz URLs if quizzes are ready; otherwise leave as `null`
 
 ### Verification and launch
 
-- [ ] Test all links: YouTube videos open correctly, PDFs download, quiz links work
-- [ ] Test on mobile: navigation, handout downloads, overall appearance
-- [ ] Test anchor link sharing: verify `#lecture-N` URLs scroll to the correct lecture after page load
-- [ ] Test social sharing preview: share the URL in Viber and Telegram, verify OG image and description render correctly
-- [ ] Verify Umami is tracking page views in the dashboard
-- [ ] Verify custom domain is fully operational: HTTPS active, `www` redirect works, `joshukraine.com/romans-course/` loads correctly
+- [x] Test all links: YouTube videos open correctly, PDFs download, quiz links work
+- [x] Test on mobile: navigation, handout downloads, overall appearance
+- [x] Test anchor link sharing: verify `#lecture-N` URLs scroll to the correct lecture after page load
+- [x] Test social sharing preview: share the URL in Viber and Telegram, verify OG image and description render correctly
+- [x] Verify Umami is tracking page views in the dashboard
+- [x] Verify custom domain is fully operational: HTTPS active, `www` redirect works, `joshukraine.com/romans-course/` loads correctly
 - [x] Update `README.md` with final content update instructions and domain configuration notes
 - [ ] Share the URL with the Viber community
 
