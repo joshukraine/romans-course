@@ -10,7 +10,7 @@ This document tracks implementation progress through phased delivery. Phases are
 | ----- | ----------------------------- | ------------ | ----------- |
 | 0     | Project Foundation            | —            | Complete    |
 | 1     | Core Page Structure           | Phase 0      | Complete    |
-| 2     | Content Population and Launch | Phase 1      | In progress |
+| 2     | Content Population and Launch | Phase 1      | Complete    |
 
 ---
 
@@ -38,7 +38,7 @@ Establish the repository, hosting configuration, and file structure.
 Build the functional page: data-driven rendering, navigation, responsive layout, and all interactive behavior.
 
 - [x] Optimize hero image: compress Parthenon source image for web (target < 200 KB), create responsive variants if needed, place in `assets/img/`
-- [x] Create Open Graph preview image (`assets/img/og-image.jpg`): 1200×630px, derived from Parthenon hero image with course title overlay
+- [x] Create Open Graph preview image (`assets/img/og-image.png`): 1200×630px, derived from Parthenon hero image with course title overlay
 - [x] Create `data/course.json` with schema and seed data (one unit, one or two lectures with placeholder content)
 - [x] Implement Alpine.js data layer: fetch `course.json` on init, store in reactive state
 - [x] Implement hero area: Parthenon background image with course title overlay, responsive cropping, fast loading
@@ -96,7 +96,7 @@ Populate with real course data, apply content updates, and prepare for sharing w
 - [x] Verify Umami is tracking page views in the dashboard
 - [x] Verify custom domain is fully operational: HTTPS active, `www` redirect works, `joshukraine.com/romans-course/` loads correctly
 - [x] Update `README.md` with final content update instructions and domain configuration notes
-- [ ] Share the URL with the Viber community
+- [x] Share the URL with the Viber community
 
 **PRD references:** `romans-course-content-updates.md`; `02-page-layout-and-content.md` §4–§5, §8–§11; `01-overview.md` §Content Structure
 
