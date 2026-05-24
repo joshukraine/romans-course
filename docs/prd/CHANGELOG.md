@@ -34,6 +34,16 @@ Each entry records one deviation or decision:
 
 ## Entries
 
+### 2026-05-24 — Terminology: course units relabeled "Модуль" in UI
+
+**What changed:** The Ukrainian label for course units in the rendered site changed from **"Розділ"** to **"Модуль"**. Updated in `index.html` only — the three `x-text` bindings for the desktop nav, mobile menu, and unit headers. PRD files (`02-page-layout-and-content.md`, `romans-course-content-updates.md`) and historical debriefs still use **"Розділ"** in their examples and section headings; those are preserved as historical record and should be read as referring to what the live site now labels **"Модуль"**.
+
+**Why:** "Розділ" is also the standard Ukrainian word for a chapter of the Bible (e.g., "Римлян, розділ 3"). For an expository Bible course that constantly references Scripture chapters, using the same word for course units creates ambiguity. "Модуль" unambiguously means a unit of the course and never a chapter of Scripture. Internal English terminology ("unit", DOM IDs like `unit-N`, the `units` array in `course.json`) is unchanged — the shift is user-facing Ukrainian only.
+
+**Category:** Pivot
+
+---
+
 *All entries below were folded back into their respective PRD files on 2026-03-25 at the Phase 1 boundary.*
 
 ### 2026-03-24 — 02-page-layout-and-content.md §11 "Custom Domain Configuration"

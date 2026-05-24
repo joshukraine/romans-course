@@ -207,7 +207,7 @@
             <a
               :href="'#unit-' + unit.number"
               class="text-sm/6 font-semibold text-sand-700 hover:text-sky-blue-600"
-              x-text="'Розділ ' + unit.number"
+              x-text="'Модуль ' + unit.number"
               @click="expandUnit(unit.number)"
             ></a>
           </template>
@@ -254,7 +254,7 @@
                     <a
                       :href="'#unit-' + unit.number"
                       class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
-                      x-text="'Розділ ' + unit.number + ': ' + unit.title"
+                      x-text="'Модуль ' + unit.number + ': ' + unit.title"
                       @click="document.getElementById('mobile-menu').close(); expandUnit(unit.number)"
                     ></a>
                   </template>
@@ -441,7 +441,7 @@
                   <div>
                     <span
                       class="text-xl font-semibold sm:text-2xl"
-                      x-text="'Розділ ' + unit.number + ': ' + unit.title"
+                      x-text="'Модуль ' + unit.number + ': ' + unit.title"
                     ></span>
                     <div
                       class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
