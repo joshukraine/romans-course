@@ -310,14 +310,13 @@
             class="text-lg/8 text-pretty text-sand-700"
             x-text="course.description"
           ></p>
-          <div class="mt-10" x-show="course.registrationUrl">
+          <div class="mt-10">
             <a
-              :href="course.registrationUrl"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#unit-1"
+              @click="expandUnit(1)"
               class="rounded-md bg-sky-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-sky-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-blue-600"
             >
-              Реєстрація
+              Переглянути курс
             </a>
           </div>
         </div>
