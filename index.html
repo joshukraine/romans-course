@@ -134,6 +134,32 @@
               return few;
             return many;
           },
+          setupAccordion() {
+            const disclosures = document.querySelectorAll(
+              '[id^="unit-disclosure-"]',
+            );
+            const observer = new MutationObserver((mutations) => {
+              for (const m of mutations) {
+                if (m.attributeName !== "hidden" || m.target.hidden) continue;
+                disclosures.forEach((d) => {
+                  if (d !== m.target && !d.hidden) {
+                    d.setAttribute("hidden", "");
+                  }
+                });
+                const num = m.target.id.replace("unit-disclosure-", "");
+                const unitEl = document.getElementById("unit-" + num);
+                if (unitEl) {
+                  unitEl.scrollIntoView({ behavior: "smooth", block: "start" });
+                }
+              }
+            });
+            disclosures.forEach((d) =>
+              observer.observe(d, {
+                attributes: true,
+                attributeFilter: ["hidden"],
+              }),
+            );
+          },
           init() {
             fetch("data/course.json")
               .then((res) => {
@@ -145,6 +171,7 @@
                 this.units = data.units;
                 this.loading = false;
                 this.$nextTick(() => {
+                  this.setupAccordion();
                   if (window.location.hash) {
                     this.scrollToHash(window.location.hash);
                   }
