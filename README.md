@@ -2,7 +2,7 @@
 
 A static, mobile-friendly website serving as the central hub for all materials in Joshua Steele's **Відкриваємо Римлян** (Discovering Romans) — an expository course on the Book of Romans, taught at Greater Grace evangelical church in Lviv, Ukraine. Students use the site to find lecture videos, download handouts, and access quizzes.
 
-**Tech stack:** Plain HTML, Tailwind CSS v4 (CDN), Alpine.js (CDN), hosted on GitHub Pages. No build step — push to `main` and the site is live.
+**Tech stack:** Plain HTML and CSS, Alpine.js (CDN), hosted on GitHub Pages. No build step — push to `main` and the site is live.
 
 **Live site:** [joshukraine.com/romans-course/](https://joshukraine.com/romans-course/)
 

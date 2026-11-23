@@ -34,6 +34,16 @@ Each entry records one deviation or decision:
 
 ## Entries
 
+### 2026-11-23 — Tailwind CDN replaced with plain CSS (01-overview.md §Tech Stack; 02-page-layout-and-content.md §1, §5, §6, §7, §10)
+
+**What changed:** Removed the Tailwind v4 browser CDN and its `text/tailwindcss` `@theme` block. All styling is now plain CSS in one `<style>` block in `index.html`: the palettes as custom properties on `:root`, named classes instead of utilities, and `min-width` media queries at the same breakpoints (640 / 768 / 1024px). PRD §10 "Tailwind Plus Reference Snippets" is retired, and the local `snippets/` directory and its `.gitignore` entry are gone. The page renders the same as before.
+
+**Why:** The browser CDN compiles CSS in every visitor's browser on every page load, and its `@4` URL is unpinned, so an upstream release could change the live site with no commit here. Tailwind v4 also needs Chrome 111+ / Safari 16.4+, while the plain CSS avoids nesting, `color-mix()` and range media queries, so older Android browsers now get the full layout. This completes the move to plain CSS and native HTML, following Modern Web Guidance, which this project has adopted.
+
+**Category:** Pivot
+
+---
+
 ### 2026-11-23 — 01-overview.md §Tech Stack; 02-page-layout-and-content.md §3 "Unit level"
 
 **What changed:** Removed Tailwind Plus Elements. Unit sections and the certificate section are now native `<details>`/`<summary>`; the unit sections share `name="modules"`, so opening one closes the others. The mobile menu is a native `<dialog>` opened with invoker commands (`commandfor` + `command`), plus a small inline script that adds the same behavior in browsers without invoker-command support and closes the menu on a tap outside the panel. The custom accordion JavaScript (a `MutationObserver` that enforced one-open-at-a-time) is gone. Alpine.js now loads with a Subresource Integrity hash.

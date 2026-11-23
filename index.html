@@ -39,9 +39,19 @@
       content="https://joshukraine.com/romans-course/assets/img/og-image.png"
     />
 
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-    <style type="text/tailwindcss">
-      @theme {
+    <style>
+      /*
+       * Plain CSS, no framework. Written flat (no nesting) and without
+       * color-mix() or media-query range syntax so older Android browsers
+       * get the full layout. Breakpoints: 40rem (640px), 48rem (768px),
+       * 64rem (1024px).
+       */
+      :root {
+        --font-sans:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", "Noto Sans", Arial, sans-serif, "Apple Color Emoji",
+          "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+
         --color-sand-50: #faf8f5;
         --color-sand-100: #f2ede6;
         --color-sand-200: #e5ddd1;
@@ -55,18 +65,81 @@
 
         --color-sky-blue-50: #f0f5fa;
         --color-sky-blue-100: #dce8f2;
-        --color-sky-blue-200: #b8d0e5;
-        --color-sky-blue-300: #8db3d4;
-        --color-sky-blue-400: #6896c0;
         --color-sky-blue-500: #4a7aa8;
         --color-sky-blue-600: #3b6189;
         --color-sky-blue-700: #2f4e6e;
-        --color-sky-blue-800: #253d57;
-        --color-sky-blue-900: #1c2e42;
+
+        --radius-md: 0.375rem;
+        --radius-lg: 0.5rem;
+        --shadow-sm:
+          0 1px 3px 0 rgb(0 0 0 / 0.1), 0 1px 2px -1px rgb(0 0 0 / 0.1);
+        --header-offset: 4rem;
       }
 
+      /* Reset: only the browser defaults this page would otherwise pick up. */
+      *,
+      ::before,
+      ::after {
+        box-sizing: border-box;
+      }
       html {
+        font-family: var(--font-sans);
+        line-height: 1.5;
+        -webkit-text-size-adjust: 100%;
+        -webkit-tap-highlight-color: transparent;
         scroll-behavior: smooth;
+      }
+      body,
+      h1,
+      h2,
+      h3,
+      h4,
+      p,
+      ol {
+        margin: 0;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-size: inherit;
+        font-weight: inherit;
+      }
+      ol {
+        padding: 0;
+      }
+      a {
+        color: inherit;
+        text-decoration: inherit;
+      }
+      button {
+        margin: 0;
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        background-color: transparent;
+        color: inherit;
+        font: inherit;
+        letter-spacing: inherit;
+      }
+      img,
+      svg {
+        display: block;
+        vertical-align: middle;
+      }
+      img {
+        max-width: 100%;
+        height: auto;
+      }
+      dialog {
+        margin: 0;
+        padding: 0;
+        border: 0;
+      }
+
+      body {
+        background-color: var(--color-sand-50);
+        color: var(--color-sand-800);
       }
 
       /* Keep the page from scrolling behind the open mobile menu */
@@ -74,8 +147,653 @@
         overflow: hidden;
       }
 
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip-path: inset(50%);
+        white-space: nowrap;
+        border-width: 0;
+      }
+
+      /* Icons */
+      .icon-sm {
+        width: 1rem;
+        height: 1rem;
+        flex-shrink: 0;
+      }
+      .icon-md {
+        width: 1.25rem;
+        height: 1.25rem;
+      }
+      .icon {
+        width: 1.5rem;
+        height: 1.5rem;
+      }
+
       .link-inline {
-        @apply text-sky-blue-600 hover:text-sky-blue-500 hover:border-b hover:border-sky-blue-500;
+        color: var(--color-sky-blue-600);
+      }
+      @media (hover: hover) {
+        .link-inline:hover {
+          border-bottom: 1px solid var(--color-sky-blue-500);
+          color: var(--color-sky-blue-500);
+        }
+      }
+      .nowrap {
+        white-space: nowrap;
+      }
+
+      /* Header and navigation */
+      .site-header {
+        position: sticky;
+        top: 0;
+        z-index: 50;
+        background-color: rgb(242 237 230 / 0.95);
+        box-shadow: var(--shadow-sm);
+        -webkit-backdrop-filter: blur(8px);
+        backdrop-filter: blur(8px);
+      }
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        max-width: 80rem;
+        margin-inline: auto;
+        padding: 0.75rem 1rem;
+      }
+      .brand {
+        color: var(--color-sand-900);
+        font-size: 1.125rem;
+        font-weight: 600;
+        line-height: calc(1.75 / 1.125);
+      }
+      .nav-toggle {
+        display: flex;
+      }
+      .icon-button {
+        margin: -0.625rem;
+        padding: 0.625rem;
+        border-radius: var(--radius-md);
+        color: var(--color-sand-700);
+      }
+      .menu-button {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .nav-links {
+        display: none;
+      }
+      .nav-link {
+        color: var(--color-sand-700);
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: 1.5rem;
+      }
+      @media (hover: hover) {
+        .nav-link:hover {
+          color: var(--color-sky-blue-600);
+        }
+      }
+
+      /* Mobile menu */
+      .mobile-menu::backdrop {
+        background-color: transparent;
+      }
+      .mobile-menu-overlay {
+        position: fixed;
+        inset: 0;
+      }
+      .mobile-menu-panel {
+        position: fixed;
+        inset-block: 0;
+        right: 0;
+        z-index: 50;
+        width: 100%;
+        overflow-y: auto;
+        padding: 1.5rem;
+        background-color: var(--color-sand-50);
+      }
+      .mobile-menu-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .mobile-menu-body {
+        display: flow-root;
+        margin-top: 1.5rem;
+      }
+      .mobile-menu-links {
+        padding-block: 1.5rem;
+      }
+      .mobile-menu-links > :not(:last-child) {
+        margin-bottom: 0.5rem;
+      }
+      .mobile-menu-link {
+        display: block;
+        margin-inline: -0.75rem;
+        padding: 0.625rem 0.75rem;
+        border-radius: var(--radius-lg);
+        color: var(--color-sand-900);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.75rem;
+      }
+      @media (hover: hover) {
+        .mobile-menu-link:hover {
+          background-color: var(--color-sand-200);
+        }
+      }
+
+      /* Hero */
+      .hero {
+        position: relative;
+        isolation: isolate;
+        overflow: hidden;
+      }
+      .hero-image,
+      .hero-overlay {
+        position: absolute;
+        inset: 0;
+        z-index: -10;
+      }
+      .hero-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+      }
+      .hero-overlay {
+        background-color: rgb(62 53 48 / 0.6);
+      }
+      .hero-inner {
+        max-width: 80rem;
+        margin-inline: auto;
+        padding-inline: 1.5rem;
+      }
+      .hero-content {
+        max-width: 42rem;
+        margin-inline: auto;
+        padding-block: 5rem;
+        text-align: center;
+      }
+      .hero-title {
+        color: #fff;
+        font-size: 2.25rem;
+        font-weight: 600;
+        line-height: calc(2.5 / 2.25);
+        letter-spacing: -0.025em;
+        text-wrap: balance;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      }
+      .hero-subtitle,
+      .hero-teacher {
+        margin-top: 1.5rem;
+        font-size: 1.125rem;
+        line-height: calc(1.75 / 1.125);
+        text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3);
+      }
+      .hero-subtitle {
+        color: var(--color-sand-100);
+        font-weight: 500;
+        text-wrap: pretty;
+      }
+      .hero-teacher {
+        color: var(--color-sand-200);
+        font-weight: 400;
+      }
+
+      /* Introduction */
+      .section {
+        background-color: var(--color-sand-50);
+      }
+      .intro {
+        padding: 4rem 1.5rem;
+      }
+      .intro-inner {
+        max-width: 42rem;
+        margin-inline: auto;
+        text-align: center;
+      }
+      .intro-text {
+        color: var(--color-sand-700);
+        font-size: 1.125rem;
+        line-height: 2rem;
+        text-wrap: pretty;
+      }
+      .intro-actions {
+        margin-top: 2.5rem;
+      }
+      .button-primary {
+        padding: 0.625rem 1rem;
+        border-radius: var(--radius-md);
+        background-color: var(--color-sky-blue-600);
+        box-shadow: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+        color: #fff;
+        font-size: 0.875rem;
+        font-weight: 600;
+        line-height: calc(1.25 / 0.875);
+      }
+      @media (hover: hover) {
+        .button-primary:hover {
+          background-color: var(--color-sky-blue-500);
+        }
+      }
+      .button-primary:focus-visible {
+        outline: 2px solid var(--color-sky-blue-600);
+        outline-offset: 2px;
+      }
+
+      /* Collapsible sections (certificate, modules) */
+      .disclosure-summary {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        width: 100%;
+        min-height: 44px;
+        color: var(--color-sand-900);
+        text-align: left;
+        list-style: none;
+        cursor: pointer;
+      }
+      .disclosure-summary::-webkit-details-marker {
+        display: none;
+      }
+      .disclosure-title {
+        font-size: 1.25rem;
+        font-weight: 600;
+        line-height: calc(1.75 / 1.25);
+      }
+      .disclosure-icon {
+        display: flex;
+        align-items: center;
+        height: 1.75rem;
+        margin-left: 1.5rem;
+      }
+      .disclosure-plus,
+      .disclosure-minus {
+        color: var(--color-sand-400);
+      }
+      .disclosure-minus,
+      .disclosure[open] .disclosure-plus {
+        display: none;
+      }
+      .disclosure[open] .disclosure-minus {
+        display: block;
+      }
+
+      /* Certificate */
+      .certificate {
+        max-width: 56rem;
+        margin-inline: auto;
+        padding: 3rem 1rem;
+      }
+      .certificate-card {
+        padding: 1.5rem;
+        border: 1px solid var(--color-sand-200);
+        border-radius: var(--radius-lg);
+        background-color: var(--color-sand-100);
+      }
+      .certificate-body {
+        margin-top: 1.5rem;
+        color: var(--color-sand-700);
+        font-size: 1rem;
+        line-height: 1.75rem;
+      }
+      .certificate-body > :not(:last-child) {
+        margin-bottom: 1rem;
+      }
+      .steps {
+        padding-left: 1.5rem;
+        list-style-type: decimal;
+      }
+      .steps > :not(:last-child) {
+        margin-bottom: 0.75rem;
+      }
+
+      /* Course content */
+      .content {
+        max-width: 56rem;
+        margin-inline: auto;
+        padding: 3rem 1rem;
+      }
+      .content-title {
+        margin-bottom: 2rem;
+        color: var(--color-sand-900);
+        font-size: 1.5rem;
+        font-weight: 600;
+        line-height: calc(2 / 1.5);
+      }
+      .status-message {
+        color: var(--color-sand-500);
+        font-size: 1.125rem;
+        line-height: calc(1.75 / 1.125);
+        text-align: center;
+      }
+      .modules > :not(:last-child) {
+        border-bottom: 1px solid var(--color-sand-200);
+      }
+      .module {
+        padding-block: 2rem;
+        scroll-margin-top: var(--header-offset);
+      }
+      .module:last-child {
+        padding-bottom: 0;
+      }
+      .module-heading {
+        display: block;
+      }
+      .module-meta,
+      .lecture-meta {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin-top: 0.25rem;
+        color: var(--color-sand-500);
+        font-size: 0.875rem;
+        line-height: calc(1.25 / 0.875);
+      }
+      .module-meta {
+        column-gap: 0.75rem;
+      }
+      .lecture-meta {
+        column-gap: 0.5rem;
+      }
+      .module-body {
+        margin-top: 1.5rem;
+      }
+      .module-body > :not(:last-child) {
+        margin-bottom: 1rem;
+      }
+      .module-empty {
+        color: var(--color-sand-400);
+        font-size: 0.875rem;
+        font-style: italic;
+        line-height: calc(1.25 / 0.875);
+      }
+
+      /* Lecture card */
+      .lecture {
+        padding: 1.25rem;
+        border: 1px solid var(--color-sand-200);
+        border-radius: var(--radius-lg);
+        background-color: #fff;
+        box-shadow: var(--shadow-sm);
+        scroll-margin-top: var(--header-offset);
+      }
+      .lecture-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        column-gap: 1rem;
+      }
+      .lecture-heading {
+        min-width: 0;
+      }
+      .lecture-title-row {
+        display: flex;
+        align-items: center;
+        column-gap: 0.5rem;
+      }
+      .lecture-title {
+        color: var(--color-sand-900);
+        font-size: 1rem;
+        font-weight: 600;
+        line-height: 1.5;
+      }
+      .copy-link {
+        flex-shrink: 0;
+        height: 1.5rem;
+        padding: 0.25rem;
+        color: var(--color-sand-300);
+        cursor: pointer;
+      }
+      @media (hover: hover) {
+        .copy-link:hover {
+          color: var(--color-sand-500);
+        }
+      }
+      .copied {
+        display: inline-flex;
+        align-items: center;
+        column-gap: 0.25rem;
+        color: var(--color-sky-blue-600);
+      }
+      .copied-label {
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: calc(1 / 0.75);
+      }
+      .badge-upcoming {
+        display: inline-block;
+        margin-top: 0.5rem;
+        padding: 0.125rem 0.5rem;
+        border-radius: var(--radius-md);
+        background-color: var(--color-sand-100);
+        color: var(--color-sand-600);
+        font-size: 0.75rem;
+        font-weight: 500;
+        line-height: calc(1 / 0.75);
+      }
+      .lecture-body {
+        margin-top: 1rem;
+      }
+      .lecture-body > :not(:last-child) {
+        margin-bottom: 1.25rem;
+      }
+      .video {
+        position: relative;
+        display: block;
+        overflow: hidden;
+        border-radius: var(--radius-md);
+      }
+      .video-thumb {
+        width: 100%;
+        object-fit: cover;
+      }
+      .video-overlay {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: rgb(0 0 0 / 0.2);
+        transition-property: background-color;
+        transition-duration: 150ms;
+        transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      @media (hover: hover) {
+        .video:hover .video-overlay {
+          background-color: rgb(0 0 0 / 0.3);
+        }
+      }
+      .video-play {
+        width: 3rem;
+        height: 3rem;
+        color: rgb(255 255 255 / 0.9);
+        filter: drop-shadow(0 4px 4px rgb(0 0 0 / 0.15));
+      }
+      .label {
+        color: var(--color-sand-500);
+        font-size: 0.75rem;
+        font-weight: 600;
+        line-height: calc(1 / 0.75);
+        letter-spacing: 0.025em;
+        text-transform: uppercase;
+      }
+      .handouts-label {
+        margin-bottom: 0.25rem;
+      }
+      .lecture-summary {
+        margin-top: 0.25rem;
+        color: var(--color-sand-700);
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+      }
+      .handout,
+      .quiz-link,
+      .quiz-pending {
+        align-items: center;
+        column-gap: 0.5rem;
+        padding: 0.625rem 0.75rem;
+        border-radius: var(--radius-md);
+        font-size: 0.875rem;
+        line-height: calc(1.25 / 0.875);
+      }
+      .handout {
+        display: flex;
+        color: var(--color-sky-blue-600);
+      }
+      @media (hover: hover) {
+        .handout:hover {
+          background-color: var(--color-sand-100);
+          color: var(--color-sky-blue-500);
+        }
+      }
+      .quiz-link,
+      .quiz-pending {
+        display: inline-flex;
+      }
+      .quiz-link {
+        background-color: var(--color-sky-blue-50);
+        color: var(--color-sky-blue-700);
+        font-weight: 500;
+      }
+      @media (hover: hover) {
+        .quiz-link:hover {
+          background-color: var(--color-sky-blue-100);
+        }
+      }
+      .quiz-pending {
+        background-color: var(--color-sand-100);
+        color: var(--color-sand-400);
+      }
+
+      /* Footer */
+      .site-footer {
+        border-top: 1px solid var(--color-sand-200);
+        background-color: var(--color-sand-100);
+      }
+      .footer-inner {
+        max-width: 56rem;
+        margin-inline: auto;
+        padding: 2rem 1rem;
+      }
+      .social {
+        display: flex;
+        justify-content: center;
+        column-gap: 1.5rem;
+      }
+      .social-link {
+        padding: 0.5rem;
+        color: var(--color-sand-500);
+      }
+      @media (hover: hover) {
+        .social-link:hover {
+          color: var(--color-sand-700);
+        }
+      }
+      .copyright {
+        margin-top: 2rem;
+        color: var(--color-sand-500);
+        font-size: 0.875rem;
+        line-height: 1.5rem;
+        text-align: center;
+      }
+
+      /* 640px and up */
+      @media (min-width: 40rem) {
+        .mobile-menu-panel {
+          max-width: 24rem;
+          box-shadow: 0 0 0 1px var(--color-sand-300);
+        }
+        .hero-content {
+          padding-block: 7rem;
+        }
+        .hero-title {
+          font-size: 3.75rem;
+          line-height: 1;
+        }
+        .hero-subtitle,
+        .hero-teacher {
+          font-size: 1.25rem;
+          line-height: 2rem;
+        }
+        .intro {
+          padding-block: 6rem;
+        }
+        .disclosure-title {
+          font-size: 1.5rem;
+          line-height: calc(2 / 1.5);
+        }
+        .certificate {
+          padding-inline: 1.5rem;
+        }
+        .certificate-card {
+          padding: 2rem;
+        }
+        .content {
+          padding: 4rem 1.5rem;
+        }
+        .content-title {
+          font-size: 1.875rem;
+          line-height: calc(2.25 / 1.875);
+        }
+        .lecture-title {
+          font-size: 1.125rem;
+          line-height: calc(1.75 / 1.125);
+        }
+        .footer-inner {
+          padding-inline: 1.5rem;
+        }
+      }
+
+      /* 768px and up */
+      @media (min-width: 48rem) {
+        .footer-inner {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+        }
+        .social {
+          order: 2;
+        }
+        .copyright {
+          order: 1;
+          margin-top: 0;
+        }
+      }
+
+      /* 1024px and up */
+      @media (min-width: 64rem) {
+        .nav {
+          padding-inline: 2rem;
+        }
+        .nav-toggle,
+        .mobile-menu {
+          display: none;
+        }
+        .nav-links {
+          display: flex;
+          column-gap: 2rem;
+        }
+        .hero-inner {
+          padding-inline: 2rem;
+        }
+        .hero-content {
+          padding-block: 9rem;
+        }
+        .intro {
+          padding-inline: 2rem;
+        }
+        .certificate,
+        .content,
+        .footer-inner {
+          padding-inline: 2rem;
+        }
       }
     </style>
     <script>
@@ -212,22 +930,17 @@
       data-website-id="81aa77d9-0c13-4656-a7a6-4e8c428484f5"
     ></script>
   </head>
-  <body class="bg-sand-50 text-sand-800" x-data="courseApp">
+  <body x-data="courseApp">
     <!-- Navigation bar -->
-    <header class="sticky top-0 z-50 bg-sand-100/95 backdrop-blur-sm shadow-sm">
-      <nav
-        aria-label="Global"
-        class="mx-auto flex max-w-7xl items-center justify-between px-4 py-3 lg:px-8"
-      >
-        <a href="#" class="text-lg font-semibold text-sand-900">
-          Відкриваємо Римлян
-        </a>
-        <div class="flex lg:hidden">
+    <header class="site-header">
+      <nav aria-label="Global" class="nav">
+        <a href="#" class="brand"> Відкриваємо Римлян </a>
+        <div class="nav-toggle">
           <button
             type="button"
             command="show-modal"
             commandfor="mobile-menu"
-            class="-m-2.5 inline-flex items-center justify-center rounded-md p-2.5 text-sand-700"
+            class="icon-button menu-button"
           >
             <span class="sr-only">Відкрити меню</span>
             <svg
@@ -236,7 +949,7 @@
               stroke="currentColor"
               stroke-width="1.5"
               aria-hidden="true"
-              class="size-6"
+              class="icon"
             >
               <path
                 d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5"
@@ -246,11 +959,11 @@
             </svg>
           </button>
         </div>
-        <div class="hidden lg:flex lg:gap-x-8">
+        <div class="nav-links">
           <template x-for="unit in units" :key="unit.number">
             <a
               :href="'#unit-' + unit.number"
-              class="text-sm/6 font-semibold text-sand-700 hover:text-sky-blue-600"
+              class="nav-link"
               x-text="'Модуль ' + unit.number"
               @click="expandUnit(unit.number)"
             ></a>
@@ -259,21 +972,16 @@
       </nav>
 
       <!-- Mobile menu -->
-      <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
-        <div class="fixed inset-0">
-          <div
-            data-dialog-panel
-            class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-sand-50 p-6 sm:max-w-sm sm:ring-1 sm:ring-sand-300"
-          >
-            <div class="flex items-center justify-between">
-              <span class="text-lg font-semibold text-sand-900">
-                Відкриваємо Римлян
-              </span>
+      <dialog id="mobile-menu" class="mobile-menu">
+        <div class="mobile-menu-overlay">
+          <div data-dialog-panel class="mobile-menu-panel">
+            <div class="mobile-menu-header">
+              <span class="brand"> Відкриваємо Римлян </span>
               <button
                 type="button"
                 command="close"
                 commandfor="mobile-menu"
-                class="-m-2.5 rounded-md p-2.5 text-sand-700"
+                class="icon-button"
               >
                 <span class="sr-only">Закрити меню</span>
                 <svg
@@ -282,7 +990,7 @@
                   stroke="currentColor"
                   stroke-width="1.5"
                   aria-hidden="true"
-                  class="size-6"
+                  class="icon"
                 >
                   <path
                     d="M6 18 18 6M6 6l12 12"
@@ -292,12 +1000,12 @@
                 </svg>
               </button>
             </div>
-            <div class="mt-6 flow-root">
-              <div class="space-y-2 py-6">
+            <div class="mobile-menu-body">
+              <div class="mobile-menu-links">
                 <template x-for="unit in units" :key="unit.number">
                   <a
                     :href="'#unit-' + unit.number"
-                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
+                    class="mobile-menu-link"
                     x-text="'Модуль ' + unit.number + ': ' + unit.title"
                     @click="document.getElementById('mobile-menu').close(); expandUnit(unit.number)"
                   ></a>
@@ -310,55 +1018,36 @@
     </header>
 
     <!-- Hero area -->
-    <section class="relative isolate overflow-hidden">
+    <section class="hero">
       <img
         src="assets/img/hero.jpg"
         alt="Партенон в Афінах"
         width="1600"
         height="1067"
         fetchpriority="high"
-        class="absolute inset-0 -z-10 size-full object-cover"
+        class="hero-image"
       />
-      <div class="absolute inset-0 -z-10 bg-sand-900/60"></div>
-      <div class="mx-auto max-w-7xl px-6 lg:px-8">
-        <div class="mx-auto max-w-2xl py-20 sm:py-28 lg:py-36">
-          <div class="text-center">
-            <h1
-              class="text-4xl font-semibold tracking-tight text-balance text-white sm:text-6xl"
-              style="text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4)"
-              x-text="course.title"
-            ></h1>
-            <p
-              class="mt-6 text-lg font-medium text-pretty text-sand-100 sm:text-xl/8"
-              style="text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)"
-            >
+      <div class="hero-overlay"></div>
+      <div class="hero-inner">
+        <div class="hero-content">
+          <div>
+            <h1 class="hero-title" x-text="course.title"></h1>
+            <p class="hero-subtitle">
               Експозиційний курс з вивчення Послання до Римлян
             </p>
-            <p
-              class="mt-6 text-lg font-normal text-sand-200 sm:text-xl/8"
-              style="text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3)"
-            >
-              Джошуа Стіл
-            </p>
+            <p class="hero-teacher">Джошуа Стіл</p>
           </div>
         </div>
       </div>
     </section>
 
     <!-- Course introduction -->
-    <section class="bg-sand-50">
-      <div class="px-6 py-16 sm:py-24 lg:px-8">
-        <div class="mx-auto max-w-2xl text-center">
-          <p
-            class="text-lg/8 text-pretty text-sand-700"
-            x-text="course.description"
-          ></p>
-          <div class="mt-10">
-            <a
-              href="#unit-1"
-              @click="expandUnit(1)"
-              class="rounded-md bg-sky-blue-600 px-4 py-2.5 text-sm font-semibold text-white shadow-xs hover:bg-sky-blue-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-sky-blue-600"
-            >
+    <section class="section">
+      <div class="intro">
+        <div class="intro-inner">
+          <p class="intro-text" x-text="course.description"></p>
+          <div class="intro-actions">
+            <a href="#unit-1" @click="expandUnit(1)" class="button-primary">
               Переглянути курс
             </a>
           </div>
@@ -367,24 +1056,20 @@
     </section>
 
     <!-- Certificate completion -->
-    <section class="bg-sand-50">
-      <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
-        <div class="rounded-lg border border-sand-200 bg-sand-100 p-6 sm:p-8">
-          <details id="certificate-disclosure" class="group">
-            <summary
-              class="flex w-full min-h-[44px] cursor-pointer list-none items-start justify-between text-left text-sand-900 [&::-webkit-details-marker]:hidden"
-            >
-              <span class="text-xl font-semibold sm:text-2xl">
-                Як отримати сертифікат
-              </span>
-              <span class="ml-6 flex h-7 items-center">
+    <section class="section">
+      <div class="certificate">
+        <div class="certificate-card">
+          <details id="certificate-disclosure" class="disclosure">
+            <summary class="disclosure-summary">
+              <span class="disclosure-title"> Як отримати сертифікат </span>
+              <span class="disclosure-icon">
                 <svg
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
                   stroke-width="1.5"
                   aria-hidden="true"
-                  class="size-6 text-sand-400 group-open:hidden"
+                  class="icon disclosure-plus"
                 >
                   <path
                     d="M12 6v12m6-6H6"
@@ -398,7 +1083,7 @@
                   stroke="currentColor"
                   stroke-width="1.5"
                   aria-hidden="true"
-                  class="hidden size-6 text-sand-400 group-open:block"
+                  class="icon disclosure-minus"
                 >
                   <path
                     d="M18 12H6"
@@ -408,13 +1093,13 @@
                 </svg>
               </span>
             </summary>
-            <div class="mt-6 space-y-4 text-base/7 text-sand-700">
+            <div class="certificate-body">
               <p>
                 Відеолекції курсу доступні безкоштовно для всіх. Однак, якщо ви
                 хочете пройти курс повністю та отримати сертифікат про
                 завершення, виконайте три кроки:
               </p>
-              <ol class="list-decimal space-y-3 pl-6">
+              <ol class="steps">
                 <li>
                   <strong>Зареєструйтесь на курс.</strong> Заповніть
                   <a
@@ -449,43 +1134,36 @@
     </section>
 
     <!-- Course content -->
-    <main class="mx-auto max-w-4xl px-4 py-12 sm:px-6 sm:py-16 lg:px-8">
-      <h2 class="mb-8 text-2xl font-semibold text-sand-900 sm:text-3xl">
-        Зміст курсу
-      </h2>
+    <main class="content">
+      <h2 class="content-title">Зміст курсу</h2>
       <template x-if="loading">
-        <p class="text-center text-lg text-sand-500">Завантаження...</p>
+        <p class="status-message">Завантаження...</p>
       </template>
       <template x-if="error">
-        <p class="text-center text-lg text-sand-500">
+        <p class="status-message">
           Не вдалося завантажити дані курсу. Спробуйте оновити сторінку.
         </p>
       </template>
       <template x-if="!loading && !error">
-        <div class="divide-y divide-sand-200">
+        <div class="modules">
           <template x-for="(unit, unitIndex) in units" :key="unit.number">
-            <div
-              :id="'unit-' + unit.number"
-              class="scroll-mt-16 py-8 first:pt-0 last:pb-0"
-            >
+            <div :id="'unit-' + unit.number" class="module">
               <details
                 :id="'unit-disclosure-' + unit.number"
                 name="modules"
-                class="group"
+                class="disclosure"
                 :open="unitIndex === units.findLastIndex(u => u.lectures.length > 0)"
               >
                 <summary
-                  class="flex w-full min-h-[44px] cursor-pointer list-none items-start justify-between text-left text-sand-900 [&::-webkit-details-marker]:hidden"
+                  class="disclosure-summary"
                   @click="scrollOnOpen($event, unit.number)"
                 >
-                  <span class="block">
+                  <span class="module-heading">
                     <span
-                      class="text-xl font-semibold sm:text-2xl"
+                      class="disclosure-title"
                       x-text="'Модуль ' + unit.number + ': ' + unit.title"
                     ></span>
-                    <span
-                      class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
-                    >
+                    <span class="module-meta">
                       <span x-text="unit.passage"></span>
                       <template x-if="unit.lectures.length > 0">
                         <span>
@@ -497,14 +1175,14 @@
                       </template>
                     </span>
                   </span>
-                  <span class="ml-6 flex h-7 items-center">
+                  <span class="disclosure-icon">
                     <svg
                       viewBox="0 0 24 24"
                       fill="none"
                       stroke="currentColor"
                       stroke-width="1.5"
                       aria-hidden="true"
-                      class="size-6 text-sand-400 group-open:hidden"
+                      class="icon disclosure-plus"
                     >
                       <path
                         d="M12 6v12m6-6H6"
@@ -518,7 +1196,7 @@
                       stroke="currentColor"
                       stroke-width="1.5"
                       aria-hidden="true"
-                      class="hidden size-6 text-sand-400 group-open:block"
+                      class="icon disclosure-minus"
                     >
                       <path
                         d="M18 12H6"
@@ -528,9 +1206,9 @@
                     </svg>
                   </span>
                 </summary>
-                <div class="mt-6 space-y-4">
+                <div class="module-body">
                   <template x-if="unit.lectures.length === 0">
-                    <p class="text-sm text-sand-400 italic">
+                    <p class="module-empty">
                       Лекції будуть додані найближчим часом.
                     </p>
                   </template>
@@ -538,21 +1216,18 @@
                     x-for="lecture in unit.lectures"
                     :key="lecture.number"
                   >
-                    <article
-                      :id="'lecture-' + lecture.number"
-                      class="scroll-mt-16 rounded-lg border border-sand-200 bg-white p-5 shadow-sm"
-                    >
-                      <div class="flex items-start justify-between gap-x-4">
-                        <div class="min-w-0">
-                          <div class="flex items-center gap-x-2">
+                    <article :id="'lecture-' + lecture.number" class="lecture">
+                      <div class="lecture-header">
+                        <div class="lecture-heading">
+                          <div class="lecture-title-row">
                             <h3
-                              class="text-base font-semibold text-sand-900 sm:text-lg"
+                              class="lecture-title"
                               x-text="'Лекція ' + lecture.number + ': ' + lecture.title"
                             ></h3>
                             <button
                               type="button"
                               @click="copyLink(lecture.number)"
-                              class="shrink-0 cursor-pointer p-1 h-6 text-sand-300 hover:text-sand-500"
+                              class="copy-link"
                               :title="copiedLecture === lecture.number ? 'Скопійовано!' : 'Копіювати посилання'"
                             >
                               <span class="sr-only">Копіювати посилання</span>
@@ -561,7 +1236,7 @@
                                   viewBox="0 0 20 20"
                                   fill="currentColor"
                                   aria-hidden="true"
-                                  class="size-4"
+                                  class="icon-sm"
                                 >
                                   <path
                                     d="M12.232 4.232a2.5 2.5 0 0 1 3.536 3.536l-1.225 1.224a.75.75 0 0 0 1.061 1.06l1.224-1.224a4 4 0 0 0-5.656-5.656l-3 3a4 4 0 0 0 .225 5.865.75.75 0 0 0 .977-1.138 2.5 2.5 0 0 1-.142-3.667l3-3Z"
@@ -572,14 +1247,12 @@
                                 </svg>
                               </template>
                               <template x-if="copiedLecture === lecture.number">
-                                <span
-                                  class="inline-flex items-center gap-x-1 text-sky-blue-600"
-                                >
+                                <span class="copied">
                                   <svg
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                     aria-hidden="true"
-                                    class="size-4"
+                                    class="icon-sm"
                                   >
                                     <path
                                       fill-rule="evenodd"
@@ -587,16 +1260,12 @@
                                       clip-rule="evenodd"
                                     />
                                   </svg>
-                                  <span class="text-xs font-medium"
-                                    >Скопійовано!</span
-                                  >
+                                  <span class="copied-label">Скопійовано!</span>
                                 </span>
                               </template>
                             </button>
                           </div>
-                          <div
-                            class="mt-1 flex flex-wrap items-center gap-x-2 text-sm text-sand-500"
-                          >
+                          <div class="lecture-meta">
                             <time
                               :datetime="lecture.date"
                               x-text="dateFmt.format(new Date(lecture.date + 'T00:00:00'))"
@@ -609,39 +1278,33 @@
                             </template>
                           </div>
                           <template x-if="lecture.status === 'upcoming'">
-                            <span
-                              class="mt-2 inline-block rounded-md bg-sand-100 px-2 py-0.5 text-xs font-medium text-sand-600"
-                            >
-                              Очікується
-                            </span>
+                            <span class="badge-upcoming"> Очікується </span>
                           </template>
                         </div>
                       </div>
 
                       <!-- Video, handouts, quiz — only for published lectures -->
                       <template x-if="lecture.status !== 'upcoming'">
-                        <div class="mt-4 space-y-5">
+                        <div class="lecture-body">
                           <template x-if="lecture.videoUrl">
                             <a
                               :href="lecture.videoUrl"
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="group relative block overflow-hidden rounded-md"
+                              class="video"
                             >
                               <img
                                 :src="'https://img.youtube.com/vi/' + videoId(lecture.videoUrl) + '/maxresdefault.jpg'"
                                 :alt="'Відео: ' + lecture.title"
-                                class="w-full object-cover"
+                                class="video-thumb"
                                 loading="lazy"
                               />
-                              <div
-                                class="absolute inset-0 flex items-center justify-center bg-black/20 group-hover:bg-black/30 transition-colors"
-                              >
+                              <div class="video-overlay">
                                 <svg
                                   viewBox="0 0 24 24"
                                   fill="currentColor"
                                   aria-hidden="true"
-                                  class="size-12 text-white/90 drop-shadow-lg"
+                                  class="video-play"
                                 >
                                   <path
                                     fill-rule="evenodd"
@@ -655,13 +1318,9 @@
 
                           <template x-if="lecture.summary">
                             <div>
-                              <h4
-                                class="text-xs font-semibold uppercase tracking-wide text-sand-500"
-                              >
-                                Про лекцію
-                              </h4>
+                              <h4 class="label">Про лекцію</h4>
                               <p
-                                class="mt-1 text-sm/6 text-sand-700"
+                                class="lecture-summary"
                                 x-text="lecture.summary"
                               ></p>
                             </div>
@@ -669,11 +1328,7 @@
 
                           <template x-if="lecture.handouts.length > 0">
                             <div>
-                              <h4
-                                class="mb-1 text-xs font-semibold uppercase tracking-wide text-sand-500"
-                              >
-                                Матеріали
-                              </h4>
+                              <h4 class="label handouts-label">Матеріали</h4>
                               <template
                                 x-for="handout in lecture.handouts"
                                 :key="handout.file"
@@ -681,13 +1336,13 @@
                                 <a
                                   :href="handout.file"
                                   download
-                                  class="flex items-center gap-x-2 rounded-md px-3 py-2.5 text-sm text-sky-blue-600 hover:bg-sand-100 hover:text-sky-blue-500"
+                                  class="handout"
                                 >
                                   <svg
                                     viewBox="0 0 20 20"
                                     fill="currentColor"
                                     aria-hidden="true"
-                                    class="size-4 shrink-0"
+                                    class="icon-sm"
                                   >
                                     <path
                                       d="M10.75 2.75a.75.75 0 0 0-1.5 0v8.614L6.295 8.235a.75.75 0 1 0-1.09 1.03l4.25 4.5a.75.75 0 0 0 1.09 0l4.25-4.5a.75.75 0 0 0-1.09-1.03l-2.955 3.129V2.75Z"
@@ -707,13 +1362,13 @@
                               :href="lecture.quizUrl"
                               target="_blank"
                               rel="noopener noreferrer"
-                              class="inline-flex items-center gap-x-2 rounded-md bg-sky-blue-50 px-3 py-2.5 text-sm font-medium text-sky-blue-700 hover:bg-sky-blue-100"
+                              class="quiz-link"
                             >
                               <svg
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                                 aria-hidden="true"
-                                class="size-4 shrink-0"
+                                class="icon-sm"
                               >
                                 <path
                                   fill-rule="evenodd"
@@ -725,14 +1380,12 @@
                             </a>
                           </template>
                           <template x-if="!lecture.quizUrl">
-                            <span
-                              class="inline-flex items-center gap-x-2 rounded-md bg-sand-100 px-3 py-2.5 text-sm text-sand-400"
-                            >
+                            <span class="quiz-pending">
                               <svg
                                 viewBox="0 0 20 20"
                                 fill="currentColor"
                                 aria-hidden="true"
-                                class="size-4 shrink-0"
+                                class="icon-sm"
                               >
                                 <path
                                   fill-rule="evenodd"
@@ -756,23 +1409,21 @@
     </main>
 
     <!-- Footer -->
-    <footer class="border-t border-sand-200 bg-sand-100">
-      <div
-        class="mx-auto max-w-4xl px-4 py-8 sm:px-6 md:flex md:items-center md:justify-between lg:px-8"
-      >
-        <div class="flex justify-center gap-x-6 md:order-2">
+    <footer class="site-footer">
+      <div class="footer-inner">
+        <div class="social">
           <a
             href="https://www.facebook.com/joshukraine"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-sand-500 hover:text-sand-700"
+            class="social-link"
           >
             <span class="sr-only">Facebook</span>
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
-              class="size-5"
+              class="icon-md"
             >
               <path
                 d="M22 12c0-5.523-4.477-10-10-10S2 6.477 2 12c0 4.991 3.657 9.128 8.438 9.878v-6.987h-2.54V12h2.54V9.797c0-2.506 1.492-3.89 3.777-3.89 1.094 0 2.238.195 2.238.195v2.46h-1.26c-1.243 0-1.63.771-1.63 1.562V12h2.773l-.443 2.89h-2.33v6.988C18.343 21.128 22 16.991 22 12z"
@@ -785,14 +1436,14 @@
             href="https://x.com/joshukraine"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-sand-500 hover:text-sand-700"
+            class="social-link"
           >
             <span class="sr-only">X</span>
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
-              class="size-5"
+              class="icon-md"
             >
               <path
                 d="M13.6823 10.6218L20.2391 3H18.6854L12.9921 9.61788L8.44486 3H3.2002L10.0765 13.0074L3.2002 21H4.75404L10.7663 14.0113L15.5685 21H20.8131L13.6819 10.6218H13.6823ZM11.5541 13.0956L10.8574 12.0991L5.31391 4.16971H7.70053L12.1742 10.5689L12.8709 11.5655L18.6861 19.8835H16.2995L11.5541 13.096V13.0956Z"
@@ -803,14 +1454,14 @@
             href="https://www.youtube.com/@JoshuaSteele"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-sand-500 hover:text-sand-700"
+            class="social-link"
           >
             <span class="sr-only">YouTube</span>
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
-              class="size-5"
+              class="icon-md"
             >
               <path
                 d="M19.812 5.418c.861.23 1.538.907 1.768 1.768C21.998 8.746 22 12 22 12s0 3.255-.418 4.814a2.504 2.504 0 0 1-1.768 1.768c-1.56.419-7.814.419-7.814.419s-6.255 0-7.814-.419a2.505 2.505 0 0 1-1.768-1.768C2 15.255 2 12 2 12s0-3.255.417-4.814a2.507 2.507 0 0 1 1.768-1.768C5.744 5 11.998 5 11.998 5s6.255 0 7.814.418ZM15.194 12 10 15V9l5.194 3Z"
@@ -823,14 +1474,14 @@
             href="https://github.com/joshukraine/romans-course"
             target="_blank"
             rel="noopener noreferrer"
-            class="p-2 text-sand-500 hover:text-sand-700"
+            class="social-link"
           >
             <span class="sr-only">GitHub</span>
             <svg
               viewBox="0 0 24 24"
               fill="currentColor"
               aria-hidden="true"
-              class="size-5"
+              class="icon-md"
             >
               <path
                 d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.019 10.019 0 0022 12.017C22 6.484 17.522 2 12 2z"
@@ -840,11 +1491,11 @@
             </svg>
           </a>
         </div>
-        <p class="mt-8 text-center text-sm/6 text-sand-500 md:order-1 md:mt-0">
+        <p class="copyright">
           &copy;
           <span x-text="new Date().getFullYear()"></span> Joshua Steele. Всі
           права захищені.
-          <span class="whitespace-nowrap"
+          <span class="nowrap"
             >Фото:
             <a
               href="https://unsplash.com/photos/ilQmlVIMN4c"
