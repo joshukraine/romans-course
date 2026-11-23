@@ -50,7 +50,7 @@
 | Site type | Static HTML (no build step, no SSG) |
 | Hosting | GitHub Pages |
 | CSS | Tailwind CSS v4 via CDN (`@tailwindcss/browser@4`) |
-| UI components | Tailwind Plus Elements via CDN (`@tailwindplus/elements@1`) — disclosures, dropdowns, dialogs |
+| UI components | Native HTML — `<details>`/`<summary>` for collapsible sections, `<dialog>` for the mobile menu |
 | Data binding | Alpine.js via CDN (`<script defer>` tag) — JSON fetch, templating, conditional rendering |
 | Asset storage | PDF handouts stored directly in the repository |
 | Video hosting | YouTube (embedded or linked) |
@@ -62,8 +62,8 @@
 
 - **No build step**: The entire site is plain HTML, CSS (via Tailwind CDN), and JS (via Alpine CDN). There is no `npm`, no compilation, no CI pipeline required. Push to `main` and the site is live within minutes.
 - **Tailwind CSS v4 CDN**: Provides the utility-class styling workflow Joshua is familiar with, loaded via a single `<script>` tag. v4 uses `@theme` directives in `<style type="text/tailwindcss">` for custom color palettes (replacing the v3 `tailwind.config` JS object). No PostCSS, no config file, no purging — the CDN handles everything.
-- **Tailwind Plus Elements CDN**: Provides interactive UI component behavior (disclosures, dropdowns, dialogs) from the Tailwind Plus snippet library, with built-in accessibility (ARIA, keyboard nav, focus management). Loaded via a single `<script type="module">` tag. Requires a Tailwind Plus license.
-- **Alpine.js CDN**: Handles data binding — fetching `course.json`, looping over units/lectures, conditional rendering, date formatting. Does not handle UI component behavior (that's Elements). One `<script defer>` tag, declarative HTML attributes, done.
+- **Native HTML components**: `<details>`/`<summary>` and `<dialog>` give keyboard support, focus management and accessible semantics with no library. A shared `name` on the unit `<details>` keeps one open at a time. Where a feature is Baseline "Newly available" (e.g. invoker commands for opening the dialog), a small inline fallback keeps the page fully usable on older browsers.
+- **Alpine.js CDN**: Handles data binding — fetching `course.json`, looping over units/lectures, conditional rendering, date formatting. Does not handle UI component behavior (that's native HTML). One `<script defer>` tag, declarative HTML attributes, done.
 - **GitHub Pages**: Free, reliable, no subscription dependency, automatic deployment on push, custom domain support. The repo is public since all content is already distributed to students.
 - **PDFs in the repo**: Handout PDFs are small (typically under 2 MB each). Storing them in the repo keeps everything in one place, versioned, and served directly by GitHub Pages. No external storage service needed.
 

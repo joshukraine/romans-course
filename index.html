@@ -69,14 +69,41 @@
         scroll-behavior: smooth;
       }
 
+      /* Keep the page from scrolling behind the open mobile menu */
+      html:has(dialog[open]) {
+        overflow: hidden;
+      }
+
       .link-inline {
         @apply text-sky-blue-600 hover:text-sky-blue-500 hover:border-b hover:border-sky-blue-500;
       }
     </style>
-    <script
-      src="https://cdn.jsdelivr.net/npm/@tailwindplus/elements@1"
-      type="module"
-    ></script>
+    <script>
+      // Mobile menu. Buttons use native invoker commands (commandfor +
+      // command="show-modal" | "close"), Baseline "newly available" since
+      // 2025-12. Older browsers (common on older Android phones) get the same
+      // behavior from this click handler.
+      if (!("command" in HTMLButtonElement.prototype)) {
+        document.addEventListener("click", (event) => {
+          const button = event.target.closest("button[commandfor][command]");
+          if (!button) return;
+          const target = document.getElementById(
+            button.getAttribute("commandfor"),
+          );
+          if (!(target instanceof HTMLDialogElement)) return;
+          const command = button.getAttribute("command");
+          if (command === "show-modal") target.showModal();
+          if (command === "close") target.close();
+        });
+      }
+      // Tapping outside the menu panel closes it (Esc is native).
+      document.addEventListener("click", (event) => {
+        const dialog = event.target.closest("dialog[open]");
+        if (dialog && !event.target.closest("[data-dialog-panel]")) {
+          dialog.close();
+        }
+      });
+    </script>
     <script>
       document.addEventListener("alpine:init", () => {
         Alpine.data("courseApp", () => ({
@@ -96,26 +123,40 @@
               setTimeout(() => (this.copiedLecture = null), 2000);
             });
           },
+          // Opening one module closes the others natively via the shared
+          // <details name="modules">; without `name` support several can stay
+          // open, which is an acceptable fallback.
           expandUnit(unitNumber) {
-            const disclosure = document.getElementById(
+            const details = document.getElementById(
               "unit-disclosure-" + unitNumber,
             );
-            if (disclosure && disclosure.hidden) {
-              disclosure.removeAttribute("hidden");
-            }
+            if (details) details.open = true;
           },
+          // Content renders after the browser's own fragment navigation, so a
+          // #lecture-N or #unit-N link on load has to be resolved here.
           scrollToHash(hash) {
             const el = document.querySelector(hash);
             if (!el) return;
-            const disclosure = el.closest("el-disclosure");
-            if (disclosure && disclosure.hidden) {
-              disclosure.removeAttribute("hidden");
-            }
-            const childDisclosure = el.querySelector("el-disclosure");
-            if (childDisclosure && childDisclosure.hidden) {
-              childDisclosure.removeAttribute("hidden");
-            }
+            const details =
+              el.closest("details") || el.querySelector("details");
+            if (details) details.open = true;
             el.scrollIntoView({ behavior: "smooth" });
+          },
+          // Opening a module collapses the one above it, which can push the
+          // new one off-screen, so bring it back into view. Bound to the
+          // summary click (keyboard Enter/Space also fire click) rather than
+          // the toggle event, so the default-open module doesn't scroll on load.
+          scrollOnOpen(event, unitNumber) {
+            const details = event.currentTarget.parentElement;
+            if (details.open) return;
+            details.addEventListener(
+              "toggle",
+              () =>
+                document
+                  .getElementById("unit-" + unitNumber)
+                  .scrollIntoView({ behavior: "smooth", block: "start" }),
+              { once: true },
+            );
           },
           dateFmt: new Intl.DateTimeFormat("uk-UA", {
             day: "numeric",
@@ -134,32 +175,6 @@
               return few;
             return many;
           },
-          setupAccordion() {
-            const disclosures = document.querySelectorAll(
-              '[id^="unit-disclosure-"]',
-            );
-            const observer = new MutationObserver((mutations) => {
-              for (const m of mutations) {
-                if (m.attributeName !== "hidden" || m.target.hidden) continue;
-                disclosures.forEach((d) => {
-                  if (d !== m.target && !d.hidden) {
-                    d.setAttribute("hidden", "");
-                  }
-                });
-                const num = m.target.id.replace("unit-disclosure-", "");
-                const unitEl = document.getElementById("unit-" + num);
-                if (unitEl) {
-                  unitEl.scrollIntoView({ behavior: "smooth", block: "start" });
-                }
-              }
-            });
-            disclosures.forEach((d) =>
-              observer.observe(d, {
-                attributes: true,
-                attributeFilter: ["hidden"],
-              }),
-            );
-          },
           init() {
             fetch("data/course.json")
               .then((res) => {
@@ -171,7 +186,6 @@
                 this.units = data.units;
                 this.loading = false;
                 this.$nextTick(() => {
-                  this.setupAccordion();
                   if (window.location.hash) {
                     this.scrollToHash(window.location.hash);
                   }
@@ -188,6 +202,9 @@
     <script
       defer
       src="https://cdn.jsdelivr.net/npm/alpinejs@3.15.3/dist/cdn.min.js"
+      integrity="sha384-4E5IZutrbnm0GBnBqEA2tgLsTg6ublElJlpE9qQQNL0WrY9g4GPahFyJYwnDet2+"
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
     ></script>
     <script
       defer
@@ -242,55 +259,54 @@
       </nav>
 
       <!-- Mobile menu -->
-      <el-dialog>
-        <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
-          <div tabindex="0" class="fixed inset-0 focus:outline-none">
-            <el-dialog-panel
-              class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-sand-50 p-6 sm:max-w-sm sm:ring-1 sm:ring-sand-300"
-            >
-              <div class="flex items-center justify-between">
-                <span class="text-lg font-semibold text-sand-900">
-                  Відкриваємо Римлян
-                </span>
-                <button
-                  type="button"
-                  command="close"
-                  commandfor="mobile-menu"
-                  class="-m-2.5 rounded-md p-2.5 text-sand-700"
+      <dialog id="mobile-menu" class="backdrop:bg-transparent lg:hidden">
+        <div class="fixed inset-0">
+          <div
+            data-dialog-panel
+            class="fixed inset-y-0 right-0 z-50 w-full overflow-y-auto bg-sand-50 p-6 sm:max-w-sm sm:ring-1 sm:ring-sand-300"
+          >
+            <div class="flex items-center justify-between">
+              <span class="text-lg font-semibold text-sand-900">
+                Відкриваємо Римлян
+              </span>
+              <button
+                type="button"
+                command="close"
+                commandfor="mobile-menu"
+                class="-m-2.5 rounded-md p-2.5 text-sand-700"
+              >
+                <span class="sr-only">Закрити меню</span>
+                <svg
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  aria-hidden="true"
+                  class="size-6"
                 >
-                  <span class="sr-only">Закрити меню</span>
-                  <svg
-                    viewBox="0 0 24 24"
-                    fill="none"
-                    stroke="currentColor"
-                    stroke-width="1.5"
-                    aria-hidden="true"
-                    class="size-6"
-                  >
-                    <path
-                      d="M6 18 18 6M6 6l12 12"
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                    />
-                  </svg>
-                </button>
+                  <path
+                    d="M6 18 18 6M6 6l12 12"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                  />
+                </svg>
+              </button>
+            </div>
+            <div class="mt-6 flow-root">
+              <div class="space-y-2 py-6">
+                <template x-for="unit in units" :key="unit.number">
+                  <a
+                    :href="'#unit-' + unit.number"
+                    class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
+                    x-text="'Модуль ' + unit.number + ': ' + unit.title"
+                    @click="document.getElementById('mobile-menu').close(); expandUnit(unit.number)"
+                  ></a>
+                </template>
               </div>
-              <div class="mt-6 flow-root">
-                <div class="space-y-2 py-6">
-                  <template x-for="unit in units" :key="unit.number">
-                    <a
-                      :href="'#unit-' + unit.number"
-                      class="-mx-3 block rounded-lg px-3 py-2.5 text-base/7 font-semibold text-sand-900 hover:bg-sand-200"
-                      x-text="'Модуль ' + unit.number + ': ' + unit.title"
-                      @click="document.getElementById('mobile-menu').close(); expandUnit(unit.number)"
-                    ></a>
-                  </template>
-                </div>
-              </div>
-            </el-dialog-panel>
+            </div>
           </div>
-        </dialog>
-      </el-dialog>
+        </div>
+      </dialog>
     </header>
 
     <!-- Hero area -->
@@ -354,12 +370,9 @@
     <section class="bg-sand-50">
       <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
         <div class="rounded-lg border border-sand-200 bg-sand-100 p-6 sm:p-8">
-          <dt>
-            <button
-              type="button"
-              command="--toggle"
-              commandfor="certificate-disclosure"
-              class="flex w-full min-h-[44px] cursor-pointer items-start justify-between text-left text-sand-900"
+          <details id="certificate-disclosure" class="group">
+            <summary
+              class="flex w-full min-h-[44px] cursor-pointer list-none items-start justify-between text-left text-sand-900 [&::-webkit-details-marker]:hidden"
             >
               <span class="text-xl font-semibold sm:text-2xl">
                 Як отримати сертифікат
@@ -371,7 +384,7 @@
                   stroke="currentColor"
                   stroke-width="1.5"
                   aria-hidden="true"
-                  class="size-6 text-sand-400 in-aria-expanded:hidden"
+                  class="size-6 text-sand-400 group-open:hidden"
                 >
                   <path
                     d="M12 6v12m6-6H6"
@@ -385,7 +398,7 @@
                   stroke="currentColor"
                   stroke-width="1.5"
                   aria-hidden="true"
-                  class="size-6 text-sand-400 not-in-aria-expanded:hidden"
+                  class="hidden size-6 text-sand-400 group-open:block"
                 >
                   <path
                     d="M18 12H6"
@@ -394,10 +407,8 @@
                   />
                 </svg>
               </span>
-            </button>
-          </dt>
-          <el-disclosure id="certificate-disclosure" hidden class="contents">
-            <dd class="mt-6 space-y-4 text-base/7 text-sand-700">
+            </summary>
+            <div class="mt-6 space-y-4 text-base/7 text-sand-700">
               <p>
                 Відеолекції курсу доступні безкоштовно для всіх. Однак, якщо ви
                 хочете пройти курс повністю та отримати сертифікат про
@@ -431,8 +442,8 @@
                 Після виконання всіх трьох кроків ви отримаєте сертифікат про
                 завершення курсу.
               </p>
-            </dd>
-          </el-disclosure>
+            </div>
+          </details>
         </div>
       </div>
     </section>
@@ -451,25 +462,28 @@
         </p>
       </template>
       <template x-if="!loading && !error">
-        <dl class="divide-y divide-sand-200">
+        <div class="divide-y divide-sand-200">
           <template x-for="(unit, unitIndex) in units" :key="unit.number">
             <div
               :id="'unit-' + unit.number"
               class="scroll-mt-16 py-8 first:pt-0 last:pb-0"
             >
-              <dt>
-                <button
-                  type="button"
-                  command="--toggle"
-                  :commandfor="'unit-disclosure-' + unit.number"
-                  class="flex w-full min-h-[44px] cursor-pointer items-start justify-between text-left text-sand-900"
+              <details
+                :id="'unit-disclosure-' + unit.number"
+                name="modules"
+                class="group"
+                :open="unitIndex === units.findLastIndex(u => u.lectures.length > 0)"
+              >
+                <summary
+                  class="flex w-full min-h-[44px] cursor-pointer list-none items-start justify-between text-left text-sand-900 [&::-webkit-details-marker]:hidden"
+                  @click="scrollOnOpen($event, unit.number)"
                 >
-                  <div>
+                  <span class="block">
                     <span
                       class="text-xl font-semibold sm:text-2xl"
                       x-text="'Модуль ' + unit.number + ': ' + unit.title"
                     ></span>
-                    <div
+                    <span
                       class="mt-1 flex flex-wrap items-center gap-x-3 text-sm text-sand-500"
                     >
                       <span x-text="unit.passage"></span>
@@ -481,8 +495,8 @@
                           ></span>
                         </span>
                       </template>
-                    </div>
-                  </div>
+                    </span>
+                  </span>
                   <span class="ml-6 flex h-7 items-center">
                     <svg
                       viewBox="0 0 24 24"
@@ -490,7 +504,7 @@
                       stroke="currentColor"
                       stroke-width="1.5"
                       aria-hidden="true"
-                      class="size-6 text-sand-400 in-aria-expanded:hidden"
+                      class="size-6 text-sand-400 group-open:hidden"
                     >
                       <path
                         d="M12 6v12m6-6H6"
@@ -504,7 +518,7 @@
                       stroke="currentColor"
                       stroke-width="1.5"
                       aria-hidden="true"
-                      class="size-6 text-sand-400 not-in-aria-expanded:hidden"
+                      class="hidden size-6 text-sand-400 group-open:block"
                     >
                       <path
                         d="M18 12H6"
@@ -513,14 +527,8 @@
                       />
                     </svg>
                   </span>
-                </button>
-              </dt>
-              <el-disclosure
-                :id="'unit-disclosure-' + unit.number"
-                :hidden="unitIndex !== units.findLastIndex(u => u.lectures.length > 0)"
-                class="contents"
-              >
-                <dd class="mt-6 space-y-4">
+                </summary>
+                <div class="mt-6 space-y-4">
                   <template x-if="unit.lectures.length === 0">
                     <p class="text-sm text-sand-400 italic">
                       Лекції будуть додані найближчим часом.
@@ -739,11 +747,11 @@
                       </template>
                     </article>
                   </template>
-                </dd>
-              </el-disclosure>
+                </div>
+              </details>
             </div>
           </template>
-        </dl>
+        </div>
       </template>
     </main>
 

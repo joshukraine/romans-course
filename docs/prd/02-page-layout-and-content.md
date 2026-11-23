@@ -80,7 +80,7 @@ This is the primary section of the page, rendered from `course.json`. It display
 
 **Unit level:**
 
-Each unit is presented as a collapsible section using the Tailwind Plus Elements `<el-disclosure>` component, which provides built-in accessibility (ARIA attributes, keyboard navigation) and animated expand/collapse behavior. The unit header displays:
+Each unit is presented as a collapsible section using a native `<details>`/`<summary>` element, which provides built-in accessibility and keyboard support, and keeps collapsed content findable with the browser's Find in page. All unit sections share one `name`, so opening one closes the others. The unit header displays:
 
 - Unit number and title (e.g., "Розділ 1: Вступ і основи")
 - Scripture passage covered (e.g., "Римлян 1:1–17")
