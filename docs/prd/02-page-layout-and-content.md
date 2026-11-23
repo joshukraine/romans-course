@@ -26,11 +26,10 @@ romans-course/
 │   ├── img/
 │   │   ├── hero.jpg        ← Parthenon hero image (compressed for web)
 │   │   └── og-image.jpg    ← Open Graph social sharing preview image
-│   └── css/                ← custom CSS if any overrides are needed beyond Tailwind
-├── snippets/               ← Tailwind Plus reference snippets (gitignored, local use only)
+│   └── css/                ← unused; all CSS lives in one <style> block in index.html
 ├── CLAUDE.md
 ├── README.md
-└── .gitignore              ← excludes snippets/, Tailwind Plus files, OS files
+└── .gitignore              ← excludes local settings and OS files
 ```
 
 Handout filenames MUST follow a consistent convention: `lecture-{NN}-{descriptive-slug}.pdf`, where `{NN}` is the zero-padded lecture number and `{descriptive-slug}` is a lowercase kebab-case description. Examples: `lecture-03-katecho-word-study.pdf`, `lecture-04-descent-staircase.pdf`. This convention keeps the `handouts/` directory sorted by lecture order and makes filenames predictable.
@@ -59,7 +58,7 @@ A prominent visual section immediately below the navigation bar, featuring the P
 
 - Display the Parthenon image as a CSS background image or full-width `<img>`, cropped to a landscape banner aspect ratio (roughly 3:1 or 4:1 on desktop, taller on mobile)
 - Overlay the course title and a brief tagline or subtitle in large, readable text with sufficient contrast against the image (text shadow, semi-transparent overlay, or both)
-- Load quickly — the image MUST be compressed (target under 200 KB for the web-optimized version) and SHOULD use responsive image techniques (`srcset` or Tailwind's responsive utilities) to serve a smaller version on mobile
+- Load quickly — the image MUST be compressed (target under 200 KB for the web-optimized version) and SHOULD use responsive image techniques (`srcset` or a media query) to serve a smaller version on mobile
 - Not be so tall that it pushes all content below the fold on mobile. The hero sets the tone; the content is the point.
 
 The warm stone tones of the Parthenon (sandy beige, cream, warm grey) and the muted blue of the sky naturally establish the color palette for the rest of the page.
@@ -248,7 +247,7 @@ For adding a new unit or updating course metadata (description, registration lin
 The following elements are hardcoded in `index.html` and change infrequently:
 
 - Page `<head>` metadata (title, description, Open Graph tags)
-- CDN script/link tags for Tailwind and Alpine
+- The page's CSS (one `<style>` block) and the Alpine.js CDN script tag
 - Footer structure and copyright year
 - Any decorative or structural HTML that doesn't vary with course content
 
@@ -258,7 +257,7 @@ The following elements are hardcoded in `index.html` and change infrequently:
 
 ### Breakpoints
 
-The site uses Tailwind's default breakpoints:
+The site's CSS uses three `min-width` media queries:
 
 - **Mobile** (default, < 640px): single-column layout, hamburger navigation, full-width lecture cards
 - **Tablet** (sm: 640px+): slightly wider content area, still single-column
@@ -266,7 +265,7 @@ The site uses Tailwind's default breakpoints:
 
 ### Content width
 
-The main content area SHOULD have a max-width constraint on larger screens (e.g., `max-w-4xl` or `max-w-5xl`) to maintain readable line lengths. Content is centered horizontally with auto margins.
+The main content area SHOULD have a max-width constraint on larger screens (currently `56rem`) to maintain readable line lengths. Content is centered horizontally with auto margins.
 
 ### Touch targets
 
@@ -279,7 +278,7 @@ All interactive elements (buttons, links, navigation items) MUST meet minimum to
 This section provides design intent, not pixel-precise specifications. The implementation has latitude within these guidelines.
 
 - **Color palette**: warm beiges and muted blues, drawn from the natural tones of the Parthenon hero image — sandy stone, cream, warm grey for primary surfaces and backgrounds; soft, desaturated blue (sky tones from the image) for accents, links, and interactive elements. These tones are consistent with the handout design language already established for the course. Avoid cold grays, stark black-and-white, or saturated primary colors. Sufficient contrast for readability is required (WCAG AA minimum).
-- **Typography**: clean, readable sans-serif body text. Ukrainian Cyrillic support is required (Tailwind's default `font-sans` stack includes system fonts with Cyrillic support). Headings MAY use a slightly different weight or size but SHOULD remain in the same font family for consistency.
+- **Typography**: clean, readable sans-serif body text. Ukrainian Cyrillic support is required (the system font stack in `--font-sans` covers Cyrillic). Headings MAY use a slightly different weight or size but SHOULD remain in the same font family for consistency.
 - **Icons**: minimal icon usage. Download icons for handout links, a play icon for video links, and navigation chevrons. Lucide, Heroicons, or similar icon sets (loaded via CDN or inline SVG) are preferred over icon fonts.
 - **Whitespace**: generous spacing between units and lectures. The page should feel airy and scannable, not dense or cluttered.
 - **Cards**: lecture entries SHOULD be visually distinct blocks (subtle background, border, or shadow) to create clear separation between lectures within a unit.
@@ -321,18 +320,9 @@ No cookie consent banner is needed — Umami does not use cookies and is GDPR-co
 
 ---
 
-## 10. Tailwind Plus Reference Snippets
+## 10. Tailwind Plus Reference Snippets (removed)
 
-Joshua has a Tailwind Plus subscription with licensed reference snippets. These snippets are used during development as design reference and inspiration but MUST NOT be committed to the public repository.
-
-**Workflow:** A `snippets/` directory at the repo root is included in `.gitignore`. During development, snippet HTML files can be placed in this directory for local reference. Code written for the site (which uses Tailwind classes inspired by the snippets but is original work) is committed normally. The `.gitignore` entry ensures the licensed files never enter version control.
-
-**`.gitignore` entries:**
-
-```
-snippets/
-.DS_Store
-```
+Removed on 2026-11-23 along with Tailwind itself. The site no longer uses Tailwind Plus, and the local `snippets/` directory and its `.gitignore` entry are gone. The section number is kept so existing "§11" references stay valid. → See `CHANGELOG.md` entry "2026-11-23 — Tailwind CDN replaced with plain CSS".
 
 ---
 

@@ -49,7 +49,7 @@
 | --- | --- |
 | Site type | Static HTML (no build step, no SSG) |
 | Hosting | GitHub Pages |
-| CSS | Tailwind CSS v4 via CDN (`@tailwindcss/browser@4`) |
+| CSS | Plain CSS in one `<style>` block in `index.html` — design tokens as custom properties, no framework |
 | UI components | Native HTML — `<details>`/`<summary>` for collapsible sections, `<dialog>` for the mobile menu |
 | Data binding | Alpine.js via CDN (`<script defer>` tag) — JSON fetch, templating, conditional rendering |
 | Asset storage | PDF handouts stored directly in the repository |
@@ -60,8 +60,8 @@
 
 ### Why These Choices
 
-- **No build step**: The entire site is plain HTML, CSS (via Tailwind CDN), and JS (via Alpine CDN). There is no `npm`, no compilation, no CI pipeline required. Push to `main` and the site is live within minutes.
-- **Tailwind CSS v4 CDN**: Provides the utility-class styling workflow Joshua is familiar with, loaded via a single `<script>` tag. v4 uses `@theme` directives in `<style type="text/tailwindcss">` for custom color palettes (replacing the v3 `tailwind.config` JS object). No PostCSS, no config file, no purging — the CDN handles everything.
+- **No build step**: The entire site is plain HTML, CSS (one inline `<style>` block), and JS (via Alpine CDN). There is no `npm`, no compilation, no CI pipeline required. Push to `main` and the site is live within minutes.
+- **Plain CSS**: One `<style>` block with named classes, the `sand` / `sky-blue` palettes as custom properties on `:root`, and `min-width` media queries at 640 / 768 / 1024px. It replaced the Tailwind v4 browser CDN, which compiled CSS in every visitor's browser on every load (Tailwind calls it a prototyping tool, not for production) and was unpinned. The CSS is written flat (no nesting) and avoids `color-mix()` and media-query range syntax so older Android browsers get the full layout.
 - **Native HTML components**: `<details>`/`<summary>` and `<dialog>` give keyboard support, focus management and accessible semantics with no library. A shared `name` on the unit `<details>` keeps one open at a time. Where a feature is Baseline "Newly available" (e.g. invoker commands for opening the dialog), a small inline fallback keeps the page fully usable on older browsers.
 - **Alpine.js CDN**: Handles data binding — fetching `course.json`, looping over units/lectures, conditional rendering, date formatting. Does not handle UI component behavior (that's native HTML). One `<script defer>` tag, declarative HTML attributes, done.
 - **GitHub Pages**: Free, reliable, no subscription dependency, automatic deployment on push, custom domain support. The repo is public since all content is already distributed to students.
@@ -69,7 +69,7 @@
 
 ### What We Are NOT Using
 
-- **FlyonUI or DaisyUI**: FlyonUI requires npm and a build step, which conflicts with the zero-build-step principle. DaisyUI's CDN option exists but adds an unnecessary abstraction layer for a single-page site. Raw Tailwind utilities provide sufficient styling control.
+- **FlyonUI or DaisyUI**: FlyonUI requires npm and a build step, which conflicts with the zero-build-step principle. DaisyUI's CDN option exists but adds an unnecessary abstraction layer for a single-page site. Plain CSS provides sufficient styling control.
 - **Hugo, Jekyll, or any SSG**: The site is simple enough that static HTML is the right tool. An SSG would add build complexity, templating conventions, and deployment configuration that aren't justified by the scope.
 - **AWS S3, Cloudflare R2, or external storage**: Not needed while assets are PDFs and links. If the project ever hosts large video files directly (rather than linking to YouTube), this decision should be revisited.
 - **Any backend or database**: There is no dynamic content, no user accounts, no server-side logic. Everything is static files served by GitHub Pages.
@@ -101,7 +101,7 @@ Content will be added progressively as lectures are delivered, roughly two lectu
 ## Development Conventions
 
 - **Git**: Conventional Commits for messages and branch naming, following the label taxonomy in `~/.claude/docs/label-taxonomy.md`.
-- **Code style**: Standard HTML/CSS conventions. Tailwind utility classes for styling. Alpine.js `x-` directives for interactivity.
+- **Code style**: Standard HTML/CSS conventions. Named CSS classes in the page's `<style>` block. Alpine.js `x-` directives for interactivity.
 - **Changes**: Small, incremental, and isolated. Content updates (adding a lecture) should be separate commits from structural changes.
 - **CLAUDE.md**: Project-level guidance for Claude Code will live in `CLAUDE.md` at the repo root.
 
