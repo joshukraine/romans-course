@@ -34,6 +34,16 @@ Each entry records one deviation or decision:
 
 ## Entries
 
+### 2026-11-23 — 01-overview.md §Tech Stack; 02-page-layout-and-content.md §3 "Unit level"
+
+**What changed:** Removed Tailwind Plus Elements. Unit sections and the certificate section are now native `<details>`/`<summary>`; the unit sections share `name="modules"`, so opening one closes the others. The mobile menu is a native `<dialog>` opened with invoker commands (`commandfor` + `command`), plus a small inline script that adds the same behavior in browsers without invoker-command support and closes the menu on a tap outside the panel. The custom accordion JavaScript (a `MutationObserver` that enforced one-open-at-a-time) is gone. Alpine.js now loads with a Subresource Integrity hash.
+
+**Why:** The browser now provides everything Elements gave us, without a CDN dependency, an unpinned `@1` version, or a Tailwind Plus license. Native `<details>` content also stays findable with the browser's Find in page while collapsed. This is PR 1 of the move off Tailwind; PR 2 replaces the Tailwind CDN with plain CSS. Browser policy: Baseline "Newly available" features are allowed only with a fallback that keeps the page fully usable, because many students use older Android phones. Without `<details name>` support several modules can be open at once, which is acceptable.
+
+**Category:** Pivot
+
+---
+
 ### 2026-05-24 — Terminology: course units relabeled "Модуль" in UI
 
 **What changed:** The Ukrainian label for course units in the rendered site changed from **"Розділ"** to **"Модуль"**. Updated in `index.html` only — the three `x-text` bindings for the desktop nav, mobile menu, and unit headers. PRD files (`02-page-layout-and-content.md`, `romans-course-content-updates.md`) and historical debriefs still use **"Розділ"** in their examples and section headings; those are preserved as historical record and should be read as referring to what the live site now labels **"Модуль"**.
