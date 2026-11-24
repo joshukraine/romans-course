@@ -894,7 +894,9 @@
             return many;
           },
           init() {
-            fetch("data/course.json")
+            // Revalidate on every load: GitHub Pages sets max-age=600, which
+            // otherwise hides newly published lectures for up to 10 minutes.
+            fetch("data/course.json", { cache: "no-cache" })
               .then((res) => {
                 if (!res.ok) throw new Error(res.status);
                 return res.json();
